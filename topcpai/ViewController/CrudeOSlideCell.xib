@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Kanit-Regular.ttf">
+            <string>Kanit-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="pZU-ek-Vsa" customClass="CrudeOSlideCell" customModule="Trading_Mobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="228"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="g6J-Vs-qy3">
+                    <rect key="frame" x="0.0" y="40" width="414" height="188"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="M5m-rO-7dY">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="pZU-ek-Vsa" id="l0U-bp-P9X"/>
+                        <outlet property="delegate" destination="pZU-ek-Vsa" id="uiT-Xd-nXt"/>
+                    </connections>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEF-bt-iwI">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNr-Re-rJz">
+                            <rect key="frame" x="189.5" y="9.5" width="35" height="21"/>
+                            <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z02-63-bCX">
+                            <rect key="frame" x="144.5" y="1" width="30" height="38"/>
+                            <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="17"/>
+                            <state key="normal" title="&lt;"/>
+                            <connections>
+                                <action selector="onBtnLeft:" destination="pZU-ek-Vsa" eventType="touchUpInside" id="IAA-Ti-sL3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kq9-cK-bU4">
+                            <rect key="frame" x="239.5" y="5" width="30" height="30"/>
+                            <state key="normal" title="&gt;"/>
+                            <connections>
+                                <action selector="onBtnRight:" destination="pZU-ek-Vsa" eventType="touchUpInside" id="Cjp-zl-2Al"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Kq9-cK-bU4" firstAttribute="centerY" secondItem="mNr-Re-rJz" secondAttribute="centerY" id="5Xd-tD-GCY"/>
+                        <constraint firstItem="mNr-Re-rJz" firstAttribute="centerX" secondItem="QEF-bt-iwI" secondAttribute="centerX" id="6BP-TN-qxe"/>
+                        <constraint firstAttribute="height" constant="40" id="8k2-Y0-Npz"/>
+                        <constraint firstItem="Kq9-cK-bU4" firstAttribute="leading" secondItem="mNr-Re-rJz" secondAttribute="trailing" constant="15" id="CUB-Mh-lw0"/>
+                        <constraint firstItem="mNr-Re-rJz" firstAttribute="leading" secondItem="z02-63-bCX" secondAttribute="trailing" constant="15" id="j86-97-GOX"/>
+                        <constraint firstItem="mNr-Re-rJz" firstAttribute="centerY" secondItem="QEF-bt-iwI" secondAttribute="centerY" id="uE2-Dy-het"/>
+                        <constraint firstItem="z02-63-bCX" firstAttribute="centerY" secondItem="mNr-Re-rJz" secondAttribute="centerY" id="uPY-Bt-GMN"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="g6J-Vs-qy3" secondAttribute="trailing" id="AdV-gs-Asx"/>
+                <constraint firstItem="QEF-bt-iwI" firstAttribute="leading" secondItem="pZU-ek-Vsa" secondAttribute="leading" id="B7r-OX-Y3G"/>
+                <constraint firstItem="g6J-Vs-qy3" firstAttribute="leading" secondItem="pZU-ek-Vsa" secondAttribute="leading" id="PBr-gn-hub"/>
+                <constraint firstItem="QEF-bt-iwI" firstAttribute="top" secondItem="pZU-ek-Vsa" secondAttribute="top" id="Pa2-n1-Sk2"/>
+                <constraint firstItem="g6J-Vs-qy3" firstAttribute="top" secondItem="QEF-bt-iwI" secondAttribute="bottom" id="Ts2-AX-fxR"/>
+                <constraint firstAttribute="trailing" secondItem="QEF-bt-iwI" secondAttribute="trailing" id="fUx-Sx-FEp"/>
+                <constraint firstAttribute="bottom" secondItem="g6J-Vs-qy3" secondAttribute="bottom" id="g8g-76-pIk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="DLp-KU-nvv"/>
+            <connections>
+                <outlet property="DataCollectionView" destination="g6J-Vs-qy3" id="gU6-A4-MV0"/>
+                <outlet property="conViewLabel" destination="8k2-Y0-Npz" id="VFN-Hj-P7P"/>
+                <outlet property="lblCounter" destination="mNr-Re-rJz" id="bKI-Fr-RGX"/>
+                <outlet property="vwLabel" destination="QEF-bt-iwI" id="Bbp-lR-Ik0"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="-133.92857142857142"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,22 @@
+excluded:
+- PocketPay/Model
+- PocketPay/Utilities/AEXML.swift
+- PocketPay/Utilities/HRToast+UIView.swift
+- PocketPay/Utilities/KeychainWrapper.swift
+- PocketPay/Utilities/UIImage+Gif.swift
+- PocketPay/Utilities/Security/RSAUtils.swift
+- PocketPay/Utilities/IJReachability.swift
+- PocketPay/Utilities/JSON.swift
+- PocketPay/Utilities/MyConfigs.swift
+- PocketPay/Utilities/MyUtilities.swift
+- PocketPay/API/XMLBuilder.swift
+- PocketPay/Extra/UICheckbox.swift
+- Pods
+
+disabled_rules: # rule identifiers to exclude from running
+- force_cast
+- line_length
+- file_length
+- function_parameter_count
+- valid_docs
+- trailing_whitespace

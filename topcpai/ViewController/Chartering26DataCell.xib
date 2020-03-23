@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Kanit-Light.ttf">
+            <string>Kanit-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="5w4-h6-kps" customClass="Chartering26DataCell" customModule="Trading_Mobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="276"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fZo-XO-43a">
+                    <rect key="frame" x="10" y="5" width="394" height="128"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="mi1-wn-3pW"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="5w4-h6-kps" id="AGp-aP-3Fp"/>
+                        <outlet property="delegate" destination="5w4-h6-kps" id="fB2-L2-0rC"/>
+                    </connections>
+                </tableView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_list" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-sp-2je">
+                    <rect key="frame" x="10" y="210" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="KxN-H4-dF6"/>
+                        <constraint firstAttribute="width" constant="25" id="Px8-Ng-KCz"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZyA-11-K8d">
+                    <rect key="frame" x="40" y="213" width="39" height="19"/>
+                    <fontDescription key="fontDescription" name="Kanit-Light" family="Kanit" pointSize="16"/>
+                    <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_calendar" translatesAutoresizingMaskIntoConstraints="NO" id="K9Y-W2-bqN">
+                    <rect key="frame" x="84" y="210" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="c8I-Kx-NcT"/>
+                        <constraint firstAttribute="width" constant="25" id="mCn-6N-DsI"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owm-eg-cYv">
+                    <rect key="frame" x="114" y="213" width="39" height="19"/>
+                    <fontDescription key="fontDescription" name="Kanit-Light" family="Kanit" pointSize="16"/>
+                    <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="S3i-Nb-Q1c">
+                    <rect key="frame" x="10" y="150" width="394" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="7Bb-cr-K8c"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="r3b-qX-Fya">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="5w4-h6-kps" id="Dkt-Sa-E0U"/>
+                        <outlet property="delegate" destination="5w4-h6-kps" id="9Db-xP-3tY"/>
+                    </connections>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZL-8N-8Pv">
+                    <rect key="frame" x="0.0" y="143" width="414" height="2"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="SA3-MS-3tg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="GxQ-V5-toa" firstAttribute="trailing" secondItem="9ZL-8N-8Pv" secondAttribute="trailing" id="4e7-bd-CMT"/>
+                <constraint firstItem="S3i-Nb-Q1c" firstAttribute="leading" secondItem="GxQ-V5-toa" secondAttribute="leading" constant="10" id="6cr-ho-Brw"/>
+                <constraint firstItem="9ZL-8N-8Pv" firstAttribute="top" secondItem="fZo-XO-43a" secondAttribute="bottom" constant="10" id="7fZ-fQ-hzR"/>
+                <constraint firstItem="Tb9-sp-2je" firstAttribute="top" secondItem="S3i-Nb-Q1c" secondAttribute="bottom" constant="10" id="AP2-cl-ATQ"/>
+                <constraint firstItem="Tb9-sp-2je" firstAttribute="leading" secondItem="fZo-XO-43a" secondAttribute="leading" id="CZa-lc-LQS"/>
+                <constraint firstItem="ZyA-11-K8d" firstAttribute="leading" secondItem="Tb9-sp-2je" secondAttribute="trailing" constant="5" id="D3W-JD-SUs"/>
+                <constraint firstItem="ZyA-11-K8d" firstAttribute="centerY" secondItem="K9Y-W2-bqN" secondAttribute="centerY" id="DjR-jy-pO3"/>
+                <constraint firstAttribute="trailing" secondItem="fZo-XO-43a" secondAttribute="trailing" constant="10" id="J8E-me-OqD"/>
+                <constraint firstItem="K9Y-W2-bqN" firstAttribute="leading" secondItem="ZyA-11-K8d" secondAttribute="trailing" constant="5" id="MC8-E2-Qe0"/>
+                <constraint firstItem="S3i-Nb-Q1c" firstAttribute="top" secondItem="9ZL-8N-8Pv" secondAttribute="bottom" constant="5" id="Oju-nm-YtJ"/>
+                <constraint firstItem="fZo-XO-43a" firstAttribute="leading" secondItem="5w4-h6-kps" secondAttribute="leading" constant="10" id="V8M-Wy-Esq"/>
+                <constraint firstItem="fZo-XO-43a" firstAttribute="top" secondItem="5w4-h6-kps" secondAttribute="top" constant="5" id="WCN-AI-a24"/>
+                <constraint firstItem="K9Y-W2-bqN" firstAttribute="centerY" secondItem="Tb9-sp-2je" secondAttribute="centerY" id="aZT-bk-UGW"/>
+                <constraint firstItem="Owm-eg-cYv" firstAttribute="leading" secondItem="K9Y-W2-bqN" secondAttribute="trailing" constant="5" id="mHT-rR-9JF"/>
+                <constraint firstItem="GxQ-V5-toa" firstAttribute="trailing" secondItem="S3i-Nb-Q1c" secondAttribute="trailing" constant="10" id="sny-r6-Ks4"/>
+                <constraint firstItem="Owm-eg-cYv" firstAttribute="centerY" secondItem="K9Y-W2-bqN" secondAttribute="centerY" id="sz8-L7-Cop"/>
+                <constraint firstItem="9ZL-8N-8Pv" firstAttribute="leading" secondItem="GxQ-V5-toa" secondAttribute="leading" id="t3r-ui-Aao"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="GxQ-V5-toa"/>
+            <connections>
+                <outlet property="btnCollection" destination="S3i-Nb-Q1c" id="eTT-oG-rgZ"/>
+                <outlet property="conTableView" destination="mi1-wn-3pW" id="p5u-YT-7JJ"/>
+                <outlet property="lblDate" destination="Owm-eg-cYv" id="luk-B5-y63"/>
+                <outlet property="lblSystem" destination="ZyA-11-K8d" id="uXt-r2-LKX"/>
+                <outlet property="mainTableView" destination="fZo-XO-43a" id="502-Es-pGq"/>
+                <outlet property="vwLine" destination="9ZL-8N-8Pv" id="fpd-bD-iMp"/>
+            </connections>
+            <point key="canvasLocation" x="476.81159420289856" y="-200.22321428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_calendar" width="20" height="20"/>
+        <image name="ic_list" width="17" height="22.5"/>
+    </resources>
+</document>

@@ -1,0 +1,6 @@
+framework module Pods_Trading_Mobile {
+  umbrella header "Pods-Trading Mobile-umbrella.h"
+
+  export *
+  module * { export * }
+}

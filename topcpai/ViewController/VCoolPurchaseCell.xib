@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Kanit-Regular.ttf">
+            <string>Kanit-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="8mr-6Y-5gY" customClass="VCoolPurchaseCell" customModule="Trading_Mobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="146"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase :" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcy-qP-E7o">
+                    <rect key="frame" x="0.0" y="0.0" width="135" height="24"/>
+                    <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="16"/>
+                    <color key="textColor" red="0.18823529410000001" green="0.17254901959999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OIw-oY-JSK">
+                    <rect key="frame" x="145" y="0.0" width="269" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="OIw-oY-JSK" firstAttribute="width" secondItem="8mr-6Y-5gY" secondAttribute="width" multiplier="0.65" id="2V2-nW-SJH"/>
+                <constraint firstItem="OIw-oY-JSK" firstAttribute="leading" secondItem="qcy-qP-E7o" secondAttribute="trailing" constant="10" id="BJk-et-Gyd"/>
+                <constraint firstItem="qcy-qP-E7o" firstAttribute="leading" secondItem="LwF-j4-lOG" secondAttribute="leading" id="PoY-wU-bWB"/>
+                <constraint firstAttribute="trailing" secondItem="OIw-oY-JSK" secondAttribute="trailing" id="TK5-ad-wMu"/>
+                <constraint firstItem="qcy-qP-E7o" firstAttribute="top" secondItem="OIw-oY-JSK" secondAttribute="top" id="ujY-LC-yyO"/>
+                <constraint firstItem="OIw-oY-JSK" firstAttribute="top" secondItem="8mr-6Y-5gY" secondAttribute="top" id="xf4-aE-fXU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="LwF-j4-lOG"/>
+            <connections>
+                <outlet property="txtPurchase" destination="OIw-oY-JSK" id="WRe-Je-rP7"/>
+            </connections>
+            <point key="canvasLocation" x="629" y="-50"/>
+        </view>
+    </objects>
+</document>

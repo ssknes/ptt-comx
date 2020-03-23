@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LJI-fb-d5Z" customClass="CharteringFinalPriceCell" customModule="Trading_Mobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LJI-fb-d5Z" id="L4M-UR-egc">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvK-uz-fX7">
+                        <rect key="frame" x="110" y="0.0" width="190" height="43.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9h-Pq-5k8">
+                        <rect key="frame" x="0.0" y="0.0" width="110" height="43.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="110" id="Off-9G-4uw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="LvK-uz-fX7" firstAttribute="top" secondItem="L4M-UR-egc" secondAttribute="top" id="IEL-hs-rXd"/>
+                    <constraint firstAttribute="trailing" secondItem="LvK-uz-fX7" secondAttribute="trailing" id="Sqm-ye-Z6A"/>
+                    <constraint firstAttribute="bottom" secondItem="f9h-Pq-5k8" secondAttribute="bottom" id="cTm-SE-NTD"/>
+                    <constraint firstAttribute="bottom" secondItem="LvK-uz-fX7" secondAttribute="bottom" id="faN-qU-ilj"/>
+                    <constraint firstItem="LvK-uz-fX7" firstAttribute="leading" secondItem="f9h-Pq-5k8" secondAttribute="trailing" id="sgo-fa-Mmn"/>
+                    <constraint firstItem="f9h-Pq-5k8" firstAttribute="top" secondItem="L4M-UR-egc" secondAttribute="top" id="uBU-Hh-VgJ"/>
+                    <constraint firstItem="f9h-Pq-5k8" firstAttribute="leading" secondItem="L4M-UR-egc" secondAttribute="leading" id="wdS-Bn-BzW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="lblData" destination="LvK-uz-fX7" id="2DL-KA-cog"/>
+                <outlet property="lblHeader" destination="f9h-Pq-5k8" id="QlN-NJ-kTD"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

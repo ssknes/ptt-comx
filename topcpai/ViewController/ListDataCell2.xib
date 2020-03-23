@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Kanit-Light.ttf">
+            <string>Kanit-Light</string>
+        </array>
+        <array key="Kanit-Regular.ttf">
+            <string>Kanit-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="BxL-AS-hQe" customClass="ListDataCell2" customModule="Trading_Mobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="146"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jc7-Lz-Nbm">
+                    <rect key="frame" x="0.0" y="0.0" width="135" height="24"/>
+                    <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="16"/>
+                    <color key="textColor" red="0.18823529410000001" green="0.17254901959999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYe-kB-Ij7">
+                    <rect key="frame" x="0.0" y="29" width="414" height="24"/>
+                    <fontDescription key="fontDescription" name="Kanit-Light" family="Kanit" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Am-8m-Ela">
+                    <rect key="frame" x="362.5" y="0.0" width="51.5" height="25"/>
+                    <color key="backgroundColor" red="0.84705882349999995" green="0.031372549020000001" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="4Nl-Fb-Qfg"/>
+                        <constraint firstAttribute="width" secondItem="8Am-8m-Ela" secondAttribute="height" multiplier="31:15" id="OXr-7u-AVx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <state key="normal" title="  Edit  ">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="onBtnEdit:" destination="BxL-AS-hQe" eventType="touchUpInside" id="2nW-sn-1hv"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYg-y7-Ii5">
+                    <rect key="frame" x="145" y="25" width="269" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="7hh-US-5fL"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="8Am-8m-Ela" firstAttribute="top" secondItem="BxL-AS-hQe" secondAttribute="top" id="0tY-5u-kba"/>
+                <constraint firstItem="hYg-y7-Ii5" firstAttribute="leading" secondItem="Jc7-Lz-Nbm" secondAttribute="trailing" constant="10" id="1jk-G8-Lj5"/>
+                <constraint firstItem="5h7-zC-9x7" firstAttribute="trailing" secondItem="YYe-kB-Ij7" secondAttribute="trailing" id="FYa-9l-6tf"/>
+                <constraint firstItem="Jc7-Lz-Nbm" firstAttribute="leading" secondItem="5h7-zC-9x7" secondAttribute="leading" id="H7P-JV-kjG"/>
+                <constraint firstItem="YYe-kB-Ij7" firstAttribute="leading" secondItem="5h7-zC-9x7" secondAttribute="leading" id="IUq-2k-huG"/>
+                <constraint firstItem="hYg-y7-Ii5" firstAttribute="width" secondItem="BxL-AS-hQe" secondAttribute="width" multiplier="0.65" id="PnB-pa-GAU"/>
+                <constraint firstItem="YYe-kB-Ij7" firstAttribute="top" secondItem="Jc7-Lz-Nbm" secondAttribute="bottom" constant="5" id="REI-IB-dgW"/>
+                <constraint firstAttribute="trailing" secondItem="8Am-8m-Ela" secondAttribute="trailing" id="tHE-zc-eyZ"/>
+                <constraint firstItem="Jc7-Lz-Nbm" firstAttribute="top" secondItem="BxL-AS-hQe" secondAttribute="top" id="uI9-MJ-J9r"/>
+                <constraint firstItem="hYg-y7-Ii5" firstAttribute="top" secondItem="8Am-8m-Ela" secondAttribute="bottom" id="vH5-qa-9Ft"/>
+                <constraint firstItem="5h7-zC-9x7" firstAttribute="trailing" secondItem="hYg-y7-Ii5" secondAttribute="trailing" id="ztl-yl-c3h"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="5h7-zC-9x7"/>
+            <connections>
+                <outlet property="btnEdit" destination="8Am-8m-Ela" id="AcW-y1-n2W"/>
+                <outlet property="lblHeader" destination="Jc7-Lz-Nbm" id="fQf-kH-9mg"/>
+                <outlet property="lblValue" destination="YYe-kB-Ij7" id="31x-Ag-NTY"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="-165.40178571428569"/>
+        </view>
+    </objects>
+</document>

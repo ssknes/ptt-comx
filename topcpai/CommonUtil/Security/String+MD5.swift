@@ -1,0 +1,32 @@
+//
+//  String+MD5.swift
+//  ICTPocketPay
+//
+//  Created by Harin Sanghirun on 10/6/58.
+
+//
+// require #import <CommonCrypto/CommonCrypto.h> in bridging header
+// http://stackoverflow.com/questions/24123518/how-to-use-cc-md5-method-in-swift-language
+
+import UIKit
+
+//extension String {
+//    var md5: String! {
+//        let str = self.cString(using: String.Encoding.utf8)
+//        let strLen = CC_LONG(self.lengthOfBytes(using: String.Encoding.utf8))
+//        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+//        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
+//
+//        CC_MD5(str!, strLen, result)
+//
+//        let hash = NSMutableString()
+//        for i in 0..<digestLen {
+//            hash.appendFormat("%02x", result[i])
+//        }
+//
+//        result.deallocate(capacity: digestLen)
+//
+//        return String(format: hash as String)
+//    }
+//
+//}

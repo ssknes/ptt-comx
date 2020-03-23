@@ -1,0 +1,10 @@
+exclude:
+- PocketPay/Model
+- PocketPay/Utilities/AEXML.swift
+- PocketPay/Utilities/HRToast+UIView.swift
+- PocketPay/Utilities/KeychainWrapper.swift
+- PocketPay/Utilities/UIImage+Gif.swift
+- PocketPay/Utilities/Security/RSAUtils.swift
+- PocketPay/Utilities/IJReachability.swift
+- PocketPay/API/XMLBuilder.swift
+- Pods
