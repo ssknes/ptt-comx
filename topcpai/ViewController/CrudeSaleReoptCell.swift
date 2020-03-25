@@ -52,7 +52,9 @@ class CrudeSaleReoptCell: BaseDataCell {
         header.removeAll()
         cellHeight.removeAll()
         
+        //normal
         appendValue(hd: "Sale&Re-Optimization No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Status :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
         appendValue(hd: "Purchased from", val: "", noValueHide: false)
         let tmp = Data["list_cdph"] as? [[String: Any]] ?? []
         appendValue(hd: "Crude Name :", val: tmp[0]["cdph_crude"] as? String ?? "-", noValueHide: false)
@@ -68,6 +70,51 @@ class CrudeSaleReoptCell: BaseDataCell {
         appendValue(hd: "Total benefit at TOP :", val: Data["total_benefit"] as? String ?? "-", noValueHide: false)
         appendValue(hd: "Brief :", val:  self.getBriefText(def: Data["brief"] as? String ?? "-"), noValueHide: false)
         appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "-", noValueHide: false)
+        
+        //advance
+        appendValue(hd: "Sale&Re-Optimization No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Advance For :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Status :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Purchased from", val: "", noValueHide: false)
+        let tmp1 = Data["list_cdph"] as? [[String: Any]] ?? []
+        appendValue(hd: "Crude Name :", val: tmp1[0]["cdph_crude"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Supplier :", val: tmp1[0]["cdph_supplier"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Quantity :", val: tmp1[0]["cdph_quantity"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Incoterm :", val: tmp1[0]["cdph_incoterm"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Price :", val: tmp1[0]["cdph_price"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Pricing Month :", val: tmp1[0]["cdph_pricing_prd"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Slide1", val: "", noValueHide: false)
+        appendValue(hd: "Slide2", val: "", noValueHide: false)
+        appendValue(hd: "\(Data["deal_benefit_title"] as? String ?? "-") :", val: Data["deal_benefit"] as? String ?? "-", noValueHide: true)
+        appendValue(hd: "\(Data["remaining_benefit_title"] as? String ?? "-") :", val: Data["remaining_benefit"] as? String ?? "-", noValueHide: true)
+        appendValue(hd: "Total benefit at TOP :", val: Data["total_benefit"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Advance Loading Request Reason :", val: Data["doc_no"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "Brief :", val:  self.getBriefText(def: Data["brief"] as? String ?? "-"), noValueHide: false)
+        appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "-", noValueHide: false)
+        
+        //final
+        appendValue(hd: "Sale&Re-Optimization No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Contract For :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Status :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Purchased from", val: "", noValueHide: false)
+        let tmp2 = Data["list_cdph"] as? [[String: Any]] ?? []
+        appendValue(hd: "Crude Name :", val: tmp2[0]["cdph_crude"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Supplier :", val: tmp2[0]["cdph_supplier"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Quantity :", val: tmp2[0]["cdph_quantity"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Incoterm :", val: tmp2[0]["cdph_incoterm"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Price :", val: tmp2[0]["cdph_price"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Pricing Month :", val: tmp2[0]["cdph_pricing_prd"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Slide1", val: "", noValueHide: false)
+        appendValue(hd: "Slide2", val: "", noValueHide: false)
+        appendValue(hd: "\(Data["deal_benefit_title"] as? String ?? "-") :", val: Data["deal_benefit"] as? String ?? "-", noValueHide: true)
+        appendValue(hd: "\(Data["remaining_benefit_title"] as? String ?? "-") :", val: Data["remaining_benefit"] as? String ?? "-", noValueHide: true)
+        appendValue(hd: "Total benefit at TOP :", val: Data["total_benefit"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Final Contract Documents :", val: Data["doc_no"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "Brief :", val:  self.getBriefText(def: Data["brief"] as? String ?? "-"), noValueHide: false)
+        appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "-", noValueHide: false)
+        
+        
+        
         makeCellHeight()
         
         arrAwardedData = getAwardData(Datas: Data["list_awarded"] as? [[String: Any]] ?? [])

@@ -89,13 +89,14 @@ class CharteringDataCell: BaseDataCell {
         value.removeAll()
         header.removeAll()
         cellHeight.removeAll()
-        
+        // normal
         let funcID = Data["function_id"] as? String ?? ""
         if funcID == "25" {
             appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
         } else {
             appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
         }
+         appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Vessel Name. :", val: Data["vessel"] as? String ?? "", noValueHide: false)
         
         if funcID != "7" {
@@ -161,6 +162,176 @@ class CharteringDataCell: BaseDataCell {
         } else {
             appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
         }
+        
+        
+        
+//        // advance
+//        let funcID = Data["function_id"] as? String ?? ""
+//               if funcID == "25" {
+//                   appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//               } else {
+//                   appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//               }
+//                appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//                appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
+//                appendValue(hd: "Vessel Name. :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//
+//               if funcID != "7" {
+//                   appendValue(hd: "Owner :", val: Data["owner"] as? String ?? "", noValueHide: false)
+//               }
+//               if funcID == "25" {
+//                   appendValue(hd: "Charterer :", val: Data["charterer_name"] as? String ?? "", noValueHide: false)
+//               }
+//               if funcID != "7" {
+//                   appendValue(hd: "Broker :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
+//               } else {
+//                   appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
+//               }
+//               if  funcID == "25" {
+//                   appendValue(hd: "Laycan :", val: CharteringCellUtils.Shared.getLaycan(data: Data), noValueHide: false)
+//               } else {
+//                   appendValue(hd: "Vessel Laycan :", val: CharteringCellUtils.Shared.getLaycan(data: Data), noValueHide: false)
+//               }
+//
+//               if funcID == "25" {
+//                   let strLoadPort: String = Data["load_port"] as? String ?? ""
+//                   let tempLoadPort = strLoadPort.split(separator: "|").dropLast()
+//                   if tempLoadPort.count > 0 {
+//                       if tempLoadPort.count == 1 {
+//                           appendValue(hd: "Loading Port :", val: tempLoadPort[0], noValueHide: false)
+//                       } else {
+//                           for i in 0...(tempLoadPort.count - 1) {
+//                               appendValue(hd: "Loading Port \(i + 1) :", val: tempLoadPort[i], noValueHide: false)
+//                           }
+//                       }
+//                   }
+//
+//                   let strDischarge: String = Data["discharge_port"] as? String ?? ""
+//                   let tempDischarge = strDischarge.split(separator: "|").dropLast()
+//                   if tempDischarge.count > 0 {
+//                       if tempDischarge.count == 1 {
+//                           appendValue(hd: "Discharging Port :", val: tempLoadPort[0], noValueHide: false)
+//                       } else {
+//                           for i in 0...(tempDischarge.count - 1) {
+//                               appendValue(hd: "Discharging Port \(i + 1) :", val: tempLoadPort[i], noValueHide: false)
+//                           }
+//                       }
+//                   }
+//               }
+//               //final price
+//               let strFinalPrice = Encryptor.decryptWithRSA(cipherText: Data["final_price"] as? String ?? "")
+//               if strFinalPrice != "|" {
+//                   let str: String = strFinalPrice
+//                   let temp = str.split(separator: "|").dropLast()
+//                   for item in temp {
+//                       let arrText: [String] = item.split(separator: ":")
+//                       if arrText.count > 1 {
+//                           appendValue(hd: "\(arrText[0]) :", val: arrText[1], noValueHide: false)
+//                       }
+//                   }
+//               }
+//               //
+//               if funcID != "25" {
+//                   appendValue(hd: "War Risk/Arm Guard :", val: Data["exten_cost"] as? String ?? "", noValueHide: false)
+//                   appendValue(hd: "Est. Freight (USD/BBL) :", val: Data["est_freight"] as? String ?? "", noValueHide: false)
+//                 appendValue(hd: "Advance loading Request Reason :", val: Data["create_by"] as? String ?? "", noValueHide: false)
+//                   appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+//                   appendValue(hd: "Requesed By :", val: Data["create_by"] as? String ?? "", noValueHide: false)
+//               } else {
+//                   appendValue(hd: "Advance loading Request Reason :", val: Data["create_by"] as? String ?? "", noValueHide: false)
+//                   appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+//               }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // final
+//             let funcID = Data["function_id"] as? String ?? ""
+//                    if funcID == "25" {
+//                        appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//                    } else {
+//                        appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//                    }
+//                     appendValue(hd: "Contract For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//                     appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
+//                     appendValue(hd: "Vessel Name. :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//
+//                    if funcID != "7" {
+//                        appendValue(hd: "Owner :", val: Data["owner"] as? String ?? "", noValueHide: false)
+//                    }
+//                    if funcID == "25" {
+//                        appendValue(hd: "Charterer :", val: Data["charterer_name"] as? String ?? "", noValueHide: false)
+//                    }
+//                    if funcID != "7" {
+//                        appendValue(hd: "Broker :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
+//                    } else {
+//                        appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
+//                    }
+//                    if  funcID == "25" {
+//                        appendValue(hd: "Laycan :", val: CharteringCellUtils.Shared.getLaycan(data: Data), noValueHide: false)
+//                    } else {
+//                        appendValue(hd: "Vessel Laycan :", val: CharteringCellUtils.Shared.getLaycan(data: Data), noValueHide: false)
+//                    }
+//
+//                    if funcID == "25" {
+//                        let strLoadPort: String = Data["load_port"] as? String ?? ""
+//                        let tempLoadPort = strLoadPort.split(separator: "|").dropLast()
+//                        if tempLoadPort.count > 0 {
+//                            if tempLoadPort.count == 1 {
+//                                appendValue(hd: "Loading Port :", val: tempLoadPort[0], noValueHide: false)
+//                            } else {
+//                                for i in 0...(tempLoadPort.count - 1) {
+//                                    appendValue(hd: "Loading Port \(i + 1) :", val: tempLoadPort[i], noValueHide: false)
+//                                }
+//                            }
+//                        }
+//
+//                        let strDischarge: String = Data["discharge_port"] as? String ?? ""
+//                        let tempDischarge = strDischarge.split(separator: "|").dropLast()
+//                        if tempDischarge.count > 0 {
+//                            if tempDischarge.count == 1 {
+//                                appendValue(hd: "Discharging Port :", val: tempLoadPort[0], noValueHide: false)
+//                            } else {
+//                                for i in 0...(tempDischarge.count - 1) {
+//                                    appendValue(hd: "Discharging Port \(i + 1) :", val: tempLoadPort[i], noValueHide: false)
+//                                }
+//                            }
+//                        }
+//                    }
+//                    //final price
+//                    let strFinalPrice = Encryptor.decryptWithRSA(cipherText: Data["final_price"] as? String ?? "")
+//                    if strFinalPrice != "|" {
+//                        let str: String = strFinalPrice
+//                        let temp = str.split(separator: "|").dropLast()
+//                        for item in temp {
+//                            let arrText: [String] = item.split(separator: ":")
+//                            if arrText.count > 1 {
+//                                appendValue(hd: "\(arrText[0]) :", val: arrText[1], noValueHide: false)
+//                            }
+//                        }
+//                    }
+//                    //
+//                    if funcID != "25" {
+//                        appendValue(hd: "War Risk/Arm Guard :", val: Data["exten_cost"] as? String ?? "", noValueHide: false)
+//                        appendValue(hd: "Est. Freight (USD/BBL) :", val: Data["est_freight"] as? String ?? "", noValueHide: false)
+//                      appendValue(hd: "Final Contract Document :", val: Data["create_by"] as? String ?? "", noValueHide: false)
+//                        appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+//                        appendValue(hd: "Requesed By :", val: Data["create_by"] as? String ?? "", noValueHide: false)
+//                    } else {
+//                        appendValue(hd: "Final Contract Document :", val: Data["create_by"] as? String ?? "", noValueHide: false)
+//                        appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+//                    }
+//
+        
         makeCellHeight()
         conTableView.constant = getTableHeight()
         mainTableView.reloadData()
