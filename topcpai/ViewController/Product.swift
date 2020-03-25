@@ -35,7 +35,8 @@ class Product: PropertyNames {
     
     var brief = ""
     
-    var advace_loading_request_data: Any?
+    var advance_loading_request_data: Any?
+    
     init() {
         // do nothing
     }

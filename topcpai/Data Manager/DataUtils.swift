@@ -263,11 +263,13 @@ class DataUtils {
         let dataString = self.replaceUnescapeString(text: availableData)
         log.info("dataString \(dataString)")
         if !dataString.contains("list_trx") {
+                log.info("do list_rtx")
             return getDataDictFromXMLPaf(System: system, Model: Product(), xmlDoc: xmlDoc, all: all)
         }
         //Normal way
         let decodedDataXML = self.setupXMLFromString(text: dataString)!.root["list_trx"].children
         var dataArray = [[String: Any]]()
+         log.info("do normal \(decodedDataXML)")
         for data in decodedDataXML {
             let transDict = getDataItemFromDecodeXML(data, all)
             dataArray.append(transDict)
@@ -287,9 +289,11 @@ class DataUtils {
         if sys.lowercased().contains("product") {
             sys = System.Product
         }
-        
+        log.info("system-> \(System.Product)")
+        log.info("sys-> \(sys)")
         switch sys {
         case System.Product:
+            log.info("system.product \(data)")
             return getDataItemPaf(Model: Product(), data: data, all: all)
         case System.VCool:
             return getDataItem(Model: VCool(), data: data, all: all)
@@ -444,12 +448,13 @@ class DataUtils {
         return transDict
     }
     
-    private func getDataItemPaf(Model: PropertyNames, data: AEXMLElement, all: Bool) -> [String: Any] {
+    private func  getDataItemPaf(Model: PropertyNames, data: AEXMLElement, all: Bool) -> [String: Any] {
         if !all {
             return [:]
         }
         var transDict = [String: Any]()
         var tmpArrAwarded = [[String: Any]]()
+          log.info("getDataItemPaf \(data)")
         for key in Model.propertyNames() {
             for item in data.children where item.name == key {
                 
@@ -470,7 +475,11 @@ class DataUtils {
                         }
                     }
                     tmpArrAwarded.append(tmpObj)
-                } else if item.value == "" {
+                }
+                if key == "advance_loading_request_data" {
+                    log.info("advancehere")
+                            }
+                else if item.value == "" {
                     transDict[key] = "-"
                 } else {
                     transDict[key] = item.value
@@ -480,12 +489,14 @@ class DataUtils {
                 transDict["awaeded"] = tmpArrAwarded
             }
         }
+        log.info("return transDict \(transDict)")
         return transDict
     }
     
     private func getDataItemPafFromDict(Model: PropertyNames, data: [String: Any], all: Bool) -> [String: Any] {
         var transDict = [String: Any]()
         for key in Model.propertyNames() {
+            log.info("key->\(key)" )
             let value = data[key] as? String ?? "-"
             transDict[key] = value
             if key == "awaeded" && data[key] as? [Any] != nil {
@@ -513,6 +524,24 @@ class DataUtils {
                     tempDict.append(tmp)
                 }
                 transDict[key] = tempDict
+            }
+            if key == "advance_loading_request_data" && data[key] as? [Any] != nil {
+                    log.info("key->ad-data \(key)")
+                if data[key] != nil {
+                  var tempDict = [[String: Any]]()
+                    let arrSubkey = Advance_loading().propertyNames()
+                    for subItem in (data[key] as! [Any]) where subItem as? [String: Any] != nil {
+                        var tmp = [String: Any]()
+                        for subKey in arrSubkey {
+                                let value = (subItem as! [String: Any])[subKey] as? String ?? "-"
+                                tmp[subKey] = value
+                        }
+                        tempDict.append(tmp)
+                    }
+                    transDict[key] = tempDict
+                   }else{
+                       print ("advance is undefined")
+                   }
             }
         }
         return transDict
@@ -550,8 +579,11 @@ class DataUtils {
         let xmlDoc = xmlDoc!
         let availableData: String = xmlDoc.root["extra_xml"].xmlCompact
         var dataString = self.replaceUnescapeString(text: availableData)
+        
         dataString = dataString.replacingOccurrences(of: "</extra_xml>", with: "")
         dataString = dataString.replacingOccurrences(of: "<extra_xml>", with: "")
+        
+        log.info("dataString2 \(dataString)")
         var dataArray = [[String: Any]]()
         do {
             let data = dataString.data(using: .utf8)
@@ -564,6 +596,7 @@ class DataUtils {
             
         }
         let dict = [System: dataArray] as [String: Any]
+        log.info("final \(dict)");
         return dict
     }
     

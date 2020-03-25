@@ -349,7 +349,7 @@ extension PafViewController: UICollectionViewDelegateFlowLayout, UICollectionVie
                 (success, xmlError, xmlData) in
                 self.progressHUD.hide(animated: true)
                 let dataDict = DataUtils.shared.getDataDictFromXMLDoc(system: system, xmlDoc: xmlData, all: false)
-                
+                log.info("data352 \(dataDict)")
                 self.doLoadDataSuccess(success: success, xmlError: xmlError, dataDict: dataDict)
             })
         }
@@ -411,6 +411,7 @@ extension PafViewController: ListCellDelegate {
             data = self.FullDataSource[selectedTap]
         }
         vc.DataDict = data[Sender.tag]
+        log.info("more btn \(vc)")
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

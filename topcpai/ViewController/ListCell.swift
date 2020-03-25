@@ -85,9 +85,11 @@ class ListCell: UITableViewCell {
     private func setTableValueCrudeSale(Data: [String: Any]) -> CGFloat {
         if (Data["system"] as? String ?? "") == System.Crude_O {
             appendValue(hd: "Sale&Re-Optimization No. :", val: Data["doc_no"] as? String ?? "-")
+               appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
             appendValue(hd: "Crude Name :", val: Data["crude_name"] as? String ?? "-")
         } else {
             appendValue(hd: "Sale No. :", val: Data["doc_no"] as? String ?? "-")
+               appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
             appendValue(hd: "Crude Name :", val: Data["crude_name"] as? String ?? "-")
         }
         appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "-")
@@ -97,6 +99,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueHedgeBot(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "File Name :", val: Data["bot_file_name"] as? String ?? "-")
+           appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Trading Book :", val: Data["bot_trading_book"] as? String ?? "-")
         appendValue(hd: "Period :", val: Data["bot_period"] as? String ?? "-")
         makeCellHeight()
@@ -105,6 +108,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueHedgeTckt(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "Ticket No. :", val: Data["ticket_no"] as? String ?? "-")
+           appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Trader :", val: Data["trader"] as? String ?? "-")
         
         if (Data["ticket_type"] as? String ?? "-").lowercased().contains("terminate") {
@@ -119,6 +123,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueHedgeSett(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "Settlement No. :", val: Data["purchase_no"] as? String ?? "-")
+           appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Company :", val: Data["company"] as? String ?? "-")
         appendValue(hd: "Settlement Period :", val: Data["settlement_period"] as? String ?? "-")
         appendValue(hd: "Type :", val: Data["frame_type"] as? String ?? "-")
@@ -128,6 +133,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueProduct(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "Reference No. :", val: Data["doc_no"] as? String ?? "")
+        appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Transaction For :", val: Data["doc_for"] as? String ?? "")
         appendValue(hd: "Request By :", val: Data["created_by"] as? String ?? "")
         makeCellHeight()
@@ -136,6 +142,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueDemurrage(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "Refference No. :", val: Data["purchase_no"] as? String ?? "")
+           appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Transaction between :", val: Data["for_company"] as? String ?? "")
         appendValue(hd: "Counterparty :", val: Data["counterparty"] as? String ?? "")
         appendValue(hd: "Demurrage type :", val: Data["demurrage_type"] as? String ?? "")
@@ -146,6 +153,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueVcool(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
+           appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
         appendValue(hd: "Quantity :", val: "\(Data["quantity_kbbl_max"] as? String ?? "") KBBL")
         makeCellHeight()
@@ -154,6 +162,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueCrudeP(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
+           appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
         appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "")
         appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "")
@@ -163,6 +172,7 @@ class ListCell: UITableViewCell {
     
     private func setTableValueBunker(Data: [String: Any]) -> CGFloat {
         appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
+           appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
         appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")")
         appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data))
         appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "")
@@ -175,18 +185,21 @@ class ListCell: UITableViewCell {
         switch Data["function_id"] as? String ?? "" {
         case "26":
             appendValue(hd: "Document No. :", val: Data["purchase_no"]  as? String ?? "")
+               appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
             appendValue(hd: "Vessel Name :", val: Data["vessel"] as? String ?? "")
             appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "")
             appendValue(hd: "Ship broker :", val: CharteringCellUtils.Shared.getBrokerName(data: Data))
             appendValue(hd: "WS :", val: Data["ws"] as? String ?? "")
         case "7":
             appendValue(hd: "Document No. :", val: Data["purchase_no"]  as? String ?? "")
+               appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
             appendValue(hd: "Vessel Name :", val: Data["vessel"] as? String ?? "")
             appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "")
             appendValue(hd: "Broker :", val: CharteringCellUtils.Shared.getBrokerName(data: Data))
             appendValue(hd: "Laycan :", val: CharteringCellUtils.Shared.getLaycan(data: Data))
         default:
             appendValue(hd: "Purhcase No. :", val: Data["purchase_no"]  as? String ?? "")
+               appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "")
             appendValue(hd: "Vessel Name :", val: Data["vessel"] as? String ?? "")
             appendValue(hd: "Owner :", val: Data["owner"] as? String ?? "")
             appendValue(hd: "Broker :", val: Data["cust_name"] as? String ?? "")

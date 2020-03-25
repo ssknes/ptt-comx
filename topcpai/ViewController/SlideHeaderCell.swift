@@ -15,7 +15,7 @@ class SlideHeaderCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     func setText(header: String) {
         lblHeader.font = UIFont.init(name: lblHeader.font.fontName, size: GlobalVar.sharedInstance.getFontSize())
         lblHeader.text = header

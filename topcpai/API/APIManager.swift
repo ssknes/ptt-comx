@@ -132,7 +132,6 @@ class APIManager {
     
     func listTransaction(system: String, data: [String: Any], callback: ((_ success: Bool, _ fail: MyError, _ xmlData: AEXMLDocument?) -> Void)?) {
         let bodyString = xmlBuilder.listTransactionXML(system: system, data: data)
-        log.info("bodyString \(bodyString)")
         if bodyString == "" {
             let err = MyError(message: MyMessage.failedToCreateRequestBody)
             callback?(false, err, nil)
@@ -621,8 +620,6 @@ class APIManager {
                 }
                 
                 if let xmlDoc = xmlDoc {
-                    
-                    log.debug("\(xmlDoc.xml)")
                     
                     // Parse extra xml
                     

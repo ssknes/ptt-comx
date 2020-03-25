@@ -43,16 +43,40 @@ class NewPafCell: BaseDataCell {
         value.removeAll()
         header.removeAll()
         
+        //normal
         appendValue(hd: "Reference No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
         appendValue(hd: "status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
-             
         appendValue(hd: "Transaction For :", val: Data["doc_for"] as? String ?? "", noValueHide: false)
-        appendValue(hd: "contact For :", val: Data["doc_for"] as? String ?? "", noValueHide: false)
-       
-      
+        //For awarded cell
         appendValue(hd: "blank", val: "", noValueHide: false)
         appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
         appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+        
+        //to check advace
+        appendValue(hd: "Reference No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "Advance For :", val: Data["doc_no"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "Transaction For :", val: Data["doc_for"] as? String ?? "", noValueHide: false)
+        //For awarded cell
+        appendValue(hd: "blank", val: "", noValueHide: false)
+        
+        appendValue(hd: "Advance Loading Request Reason :", val: "", noValueHide: false)
+        appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+        appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+        
+        //to final
+        appendValue(hd: "Reference No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
+        appendValue(hd: "contact For :", val: Data["doc_no"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "Transaction For :", val: Data["doc_for"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "Customer :", val: Data["doc_for"] as? String ?? "", noValueHide: false)
+        //For awarded cell
+        appendValue(hd: "blank", val: "", noValueHide: false)
+        
+        appendValue(hd: "Final Contract Documents :", val: "", noValueHide: false)
+        appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+        appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+        
         makeCellHeight()
         let awardData = Data["awaeded"] as? [[String: Any]] ?? []
         conTableView.constant = processAwardData(Datas: awardData)
@@ -74,7 +98,9 @@ class NewPafCell: BaseDataCell {
         awardHeader = screenArrHeader(Data: headers, Checker: checkers)
         awardData = screenArrData(Data: datas, Checker: checkers)
         awardHeight = getAwardArrHeight()
-        cellHeight[2] = getAwardDataHeight()
+        
+        // normal=2 advance = 4 final = 5
+        cellHeight[4] = getAwardDataHeight() //set new hight
 
         return getTableHeight()
     }
@@ -359,7 +385,9 @@ extension NewPafCell: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 2 { // Table Cell
+        
+        // normal=2 advance = 4 final = 5
+        if indexPath.row == 4 { // Table Cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "slidecell") as! PafSlideCell
             cell.setCell(Type: serviceType, Headers: awardHeader, Datas: awardData, CellHeight: awardHeight)
             return cell
