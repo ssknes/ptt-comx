@@ -38,7 +38,9 @@ class Chartering26DataCell: BaseDataCell {
         header.removeAll()
         cellHeight.removeAll()
         
+        //normal
         appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+        appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Vessel :", val: Data["vessel"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Ship broken :", val: CharteringCellUtils.Shared.getBrokerName(data: Data), noValueHide: false)
@@ -49,6 +51,43 @@ class Chartering26DataCell: BaseDataCell {
         appendValue(hd: "Charter Out : Total Expense", val: "\(getCurrencyText(Data["total_ex"] as? String ?? "")) USD", noValueHide: false)
         appendValue(hd: "Net Benefit :", val: "\(getCurrencyText(Data["net_benefit"] as? String ?? "")) USD", noValueHide: false)
         appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+        
+        //advance
+//        appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Advance For :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Status :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//
+//        appendValue(hd: "Vessel :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Ship broken :", val: CharteringCellUtils.Shared.getBrokerName(data: Data), noValueHide: false)
+//        appendValue(hd: "WS :", val: Data["ws"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Laycan :", val: CharteringCellUtils.Shared.getLaycan(data: Data), noValueHide: false)
+//        appendValue(hd: "Route :", val: Data["route"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "No Charter Out : Total Expense", val: "\(getCurrencyText(Data["no_total_ex"] as? String ?? "")) USD", noValueHide: false)
+//        appendValue(hd: "Charter Out : Total Expense", val: "\(getCurrencyText(Data["total_ex"] as? String ?? "")) USD", noValueHide: false)
+//        appendValue(hd: "Net Benefit :", val: "\(getCurrencyText(Data["net_benefit"] as? String ?? "")) USD", noValueHide: false)
+//        appendValue(hd: "Advance Loading Request Reason :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+        
+        
+//        //advance
+//        appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Contract For :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Status :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//
+//        appendValue(hd: "Vessel :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Ship broken :", val: CharteringCellUtils.Shared.getBrokerName(data: Data), noValueHide: false)
+//        appendValue(hd: "WS :", val: Data["ws"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Laycan :", val: CharteringCellUtils.Shared.getLaycan(data: Data), noValueHide: false)
+//        appendValue(hd: "Route :", val: Data["route"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "No Charter Out : Total Expense", val: "\(getCurrencyText(Data["no_total_ex"] as? String ?? "")) USD", noValueHide: false)
+//        appendValue(hd: "Charter Out : Total Expense", val: "\(getCurrencyText(Data["total_ex"] as? String ?? "")) USD", noValueHide: false)
+//        appendValue(hd: "Net Benefit :", val: "\(getCurrencyText(Data["net_benefit"] as? String ?? "")) USD", noValueHide: false)
+//        appendValue(hd: "Final Contract Documents :", val: Data["vessel"] as? String ?? "", noValueHide: false)
+//        appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+        
+        
         makeCellHeight()
         conTableView.constant = getTableHeight()
         mainTableView.reloadData()
