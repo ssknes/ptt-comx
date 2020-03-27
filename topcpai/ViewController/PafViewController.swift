@@ -101,6 +101,7 @@ class PafViewController: BaseListViewController {
                         return DataUtils.shared.getFilterResult(data: text, text: searchText)
                     })
                     self.FullDataSource.append(muArr)
+                    log.info("YYYYYYYYYY ======>>>> \(self.FullDataSource[0])")
                     if self.Filter.checkEmptyText() {
                         self.FullFiltered.append(muArr)
                     } else {

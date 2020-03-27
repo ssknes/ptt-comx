@@ -31,11 +31,11 @@ class Product: PropertyNames {
     var doc_form: String = ""
     var doc_status: String = ""
     var awaeded: Any?
+    var advance_loading_request_data: Any?
+    var contract_data: Any?
     var created_by: String = ""
     
     var brief = ""
-    
-    var advance_loading_request_data: Any?
     
     init() {
         // do nothing
@@ -43,7 +43,6 @@ class Product: PropertyNames {
 }
 
 class Advance_loading: PropertyNames {
-    
     var alr_trans_id: String = ""
     var alr_approval_type: String = ""
     var alr_status: String = ""
@@ -54,6 +53,19 @@ class Advance_loading: PropertyNames {
     var alr_supplier: String = ""
     var alr_material: String = ""
 }
+
+class Contract_Data: PropertyNames {
+    var caf_trans_id: String = ""
+    var caf_approval_type: String = ""
+    var caf_status: String = ""
+    var caf_contract_no: String = ""
+    var caf_is_cap_authorize: String = ""
+    var caf_final_documents: String = ""
+    var caf_customer: String = ""
+    var caf_supplier: String = ""
+    var caf_materials: Any?
+}
+
 
 class Product_Award: PropertyNames {
     var awarded_customer: String = ""

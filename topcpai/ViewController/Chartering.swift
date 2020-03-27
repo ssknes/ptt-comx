@@ -50,6 +50,9 @@ class Chartering: PropertyNames {
     var charterer: String = ""
     var charterer_name: String = ""
     
+    var advance_loading_request_data: Any?
+    var contract_data: Any?
+    
     var brief = ""
     init() {
         // do nothing

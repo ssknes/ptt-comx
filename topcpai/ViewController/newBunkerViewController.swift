@@ -117,23 +117,28 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                 for i in 0...count{
                     var muArr = [[String: Any]]()
                     for data in dataDict[System.Bunker] as! [[String : Any]] {
+                        log.info("LLLLLLLLL ======>>>> \(data)")
                         if (data["status"] as? String ?? "") == self.statusArr[i]{
+//                            log.info("DDDDDDDDDDDD ======>>>> \(data)")
                             muArr.append(data)
                         }
                     }
                     muArr = DataUtils.shared.getSortedByDateData(inputArr: muArr)
-                    
+                   
                     var fuArr = [[String : Any]]()
                     fuArr = muArr.filter({ (text) -> Bool in
                         return DataUtils.shared.getFilterResult(data: text, text: self.searchText)
                     })
+                    log.info("DDDDDDDDDDDD ======>>>> \(muArr)")
                     self.FullDataSource.append(muArr)
-                    if self.bunkerFilter.checkEmptyText() {
-                        self.FullFiltered.append(muArr)
-                    } else {
-                        self.FullFiltered.append(fuArr)
-                    }
+                    log.info("YYYYYYYYYY ======>>>> \(self.FullDataSource)")
+//                    if self.bunkerFilter.checkEmptyText() {
+//                        self.FullFiltered.append(muArr)
+//                    } else {
+//                        self.FullFiltered.append(fuArr)
+//                    }
                 }
+                
                 for i in 0...(tabArr.count - 1) {
                     var temph = [CGFloat]()
                     for _ in self.FullDataSource[i] {
@@ -236,6 +241,7 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
 
 extension newBunkerViewController {
     func initTabArray(){
+        log.info("MMMMMMMM ======>>>> \(statusArr)")
         tabArr.removeAll()
         statusArr.removeAll()
         self.CellHeight.removeAll()

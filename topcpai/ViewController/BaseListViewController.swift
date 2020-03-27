@@ -83,8 +83,10 @@ class BaseListViewController : BaseViewController {
     
     func setStatusArr(systemType: String) {
         for data in (GlobalVar.sharedInstance.FrontData) where data.name.uppercased() == systemType.uppercased() {
+            log.info("PPPPPPPPPPP ======>>>> \(data.status)")
             self.tabArr = data.tab.split(separator: "|")
             self.statusArr = data.status.split(separator: "|")
+             log.info("QQQQQQQ ======>>>> \(self.statusArr)")
         }
     }
 }
