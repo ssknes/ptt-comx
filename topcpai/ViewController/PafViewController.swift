@@ -101,6 +101,7 @@ class PafViewController: BaseListViewController {
                         return DataUtils.shared.getFilterResult(data: text, text: searchText)
                     })
                     self.FullDataSource.append(muArr)
+                    log.info("YYYYYYYYYY ======>>>> \(self.FullDataSource[0])")
                     if self.Filter.checkEmptyText() {
                         self.FullFiltered.append(muArr)
                     } else {
@@ -349,7 +350,7 @@ extension PafViewController: UICollectionViewDelegateFlowLayout, UICollectionVie
                 (success, xmlError, xmlData) in
                 self.progressHUD.hide(animated: true)
                 let dataDict = DataUtils.shared.getDataDictFromXMLDoc(system: system, xmlDoc: xmlData, all: false)
-                
+               
                 self.doLoadDataSuccess(success: success, xmlError: xmlError, dataDict: dataDict)
             })
         }

@@ -39,6 +39,8 @@ class Crude: PropertyNames {
     var loading_period = ""
     var discharging_period = ""
     var ben_m = ""
+    var advance_loading_request_data: Any?
+    var contract_data: Any?
 
     var brief = ""
     
