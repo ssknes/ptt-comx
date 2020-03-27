@@ -1413,7 +1413,7 @@
 					7B4AF30C1DEE8AB3006C6A9A = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 629782P6E6;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1942,9 +1942,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = topcpai/topcpai.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2001301334P;
 				DEVELOPMENT_TEAM = 629782P6E6;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1955,7 +1955,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pttict.topcpai;
 				PRODUCT_NAME = "Trading Mobile";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "InHouse-CPAI";
 				SWIFT_OBJC_BRIDGING_HEADER = $PROJECT_DIR/topcpai/CommonUtil/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1968,7 +1968,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = topcpai/topcpai.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2001301334P;

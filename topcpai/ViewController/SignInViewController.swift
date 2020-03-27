@@ -95,6 +95,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     func authentication(success: Bool, fail: MyError?, dataDict: [String: Any]) {
         self.progressHUD.removeFromSuperview()
+        log.info("authentication \(dataDict)")
         
         if success {
             self.prepareNextPage(dataDict)

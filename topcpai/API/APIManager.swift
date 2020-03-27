@@ -125,6 +125,7 @@ class APIManager {
                     errMsg = MyMessage.failedToParseReponseBody
                 }
                 let err = MyError(message: errMsg)
+                log.info("xmlDoc nil: \(dataDict)")
                 callback?(successFlag, err, dataDict)
             })
         }
@@ -204,6 +205,7 @@ class APIManager {
         //----------
         var dataDict = Dictionary<String, Any>()
         let bodyString = xmlBuilder.getActionButtonXML(system: system, type: type, transaction_id: transaction_id, companyCode: companyCode)
+        log.debug("\(bodyString)")
         if bodyString == "" {
             let err = MyError(message: MyMessage.failedToCreateRequestBody)
             callback?(false, err, dataDict[system] as? [Button] ?? [])
@@ -229,8 +231,10 @@ class APIManager {
                     // Parse extra xml
                     let availableData = xmlDoc.root["extra_xml"].xml
                     let dataString = self.replaceUnescapeButtonString(text: availableData)
+                    log.info("getzbutton dataString \(dataString)")
                     let decodedDataXML = self.setupXMLFromString(text: dataString).root[self.getButtonKey(system: system)].children
                     var dataArray = [Button]()
+                      log.info("dataArray dataString \(dataArray)")
                     for data in decodedDataXML {
                         let newButton = Button()
                         

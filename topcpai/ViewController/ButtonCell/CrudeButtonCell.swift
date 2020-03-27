@@ -74,6 +74,7 @@ class CrudeButtonCell: UICollectionViewCell {
     }
     
     private func showAlertApprove() {
+        log.info("Alert Approve")
         switch getSystemName(){
         default:
             self.delegate?.onActionButton(view: getDefaultAlertApprove())
