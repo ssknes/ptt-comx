@@ -49,6 +49,15 @@
                         <action selector="onBtnEdit:" destination="iN0-l3-epB" eventType="touchUpInside" id="ht4-B3-nWd"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9hi-zi-6rq">
+                    <rect key="frame" x="143" y="3" width="271" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="tintColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title=" document" image="pdf">
+                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -67,8 +76,12 @@
                 <outlet property="btnEdit" destination="5dK-ao-4mC" id="wwz-HQ-LFD"/>
                 <outlet property="lblHeader" destination="L8a-MZ-kI8" id="5d6-LI-53i"/>
                 <outlet property="lblValue" destination="GaQ-Fg-H0Z" id="dbz-Do-sUw"/>
+                <outlet property="viewPdf" destination="9hi-zi-6rq" id="4Ty-EZ-8nq"/>
             </connections>
             <point key="canvasLocation" x="53.623188405797109" y="-244.41964285714283"/>
         </view>
     </objects>
+    <resources>
+        <image name="pdf" width="16" height="16"/>
+    </resources>
 </document>

@@ -18,7 +18,7 @@ class ListDataCell: UITableViewCell {
     @IBOutlet weak var lblHeader: UILabel!
     @IBOutlet weak var lblValue: UILabel!
     @IBOutlet weak var btnEdit: UIButton!
-
+    @IBOutlet weak var viewPdf: UIButton!
     
     weak var delegate: ListDataCellDelegate?
     var htmlValue: String = ""
@@ -36,15 +36,34 @@ class ListDataCell: UITableViewCell {
         lblHeader.text = header
         if (lblHeader.text?.lowercased().contains("brief"))! {
             btnEdit.isHidden = false
+            viewPdf.isHidden = true
             lblValue.text = ""
             lblValue.font = UIFont.init(name: "Kanit-Light", size: GlobalVar.sharedInstance.getFontSize())
             lblValue.textColor = txtColor
             htmlValue = value
             lblValue.text = value.html2String
+        }else if(lblHeader.text?.lowercased().contains("final contract documents"))!{
+            viewPdf.isHidden = false
+            btnEdit.isHidden = true
+            lblValue.text = ""
+            
+            let attrs = [
+                NSAttributedString.Key.underlineStyle : 1]
+
+            let attributedString = NSMutableAttributedString(string:"", attributes:attrs)
+            let buttonTitleStr = NSMutableAttributedString(string:"final_document", attributes:attrs)
+            
+            attributedString.append(buttonTitleStr)
+            viewPdf.setAttributedTitle(attributedString, for: .normal)
+            viewPdf.titleLabel?.font =  UIFont(name: "Kanit-Light", size: GlobalVar.sharedInstance.getFontSize())
+            viewPdf.setTitleColor(txtColor,for: .normal)
+            let spacing = 10; // the amount of spacing to appear between image and title
+            viewPdf.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: CGFloat(spacing));
+            viewPdf.titleEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0);
         }
         else {
             btnEdit.isHidden = true
-            
+            viewPdf.isHidden = true
             if bold {
                 lblValue.font = UIFont.init(name: "Kanit-SemiBold", size: GlobalVar.sharedInstance.getFontSize())
                 lblValue.textColor = txtColorBold

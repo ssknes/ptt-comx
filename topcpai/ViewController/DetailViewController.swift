@@ -71,7 +71,9 @@ class DetailViewController: BaseViewController {
                 for x in dataDict where x.name.lowercased() == "certified" {
                     x.name = "ENDORSE"
                 }
+                log.info("getButtonData \(dataDict)")
                 self.arrButton = DataUtils.shared.getSortedArrButton(data: dataDict)
+                log.info("getButtonData2 \( self.arrButton)")
             }
             self.initView()
             self.mainTableView.reloadData()
