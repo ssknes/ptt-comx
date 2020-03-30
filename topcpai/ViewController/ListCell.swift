@@ -162,39 +162,45 @@ class ListCell: UITableViewCell {
     }
     
     private func setTableValueCrudeP(Data: [String: Any]) -> CGFloat {
-        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
-        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
-        
-        if  tmpArrAdvanceLoading.count > 0 {
-            for item in tmpArrAdvanceLoading where item["alr_status"] as? String != "APPROVED" {
-                appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
-                appendValue(hd: "Status :", val: "Waiting Advance Loading" as? String ?? "")
-                appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
-                appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "")
-                appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "")
-            }
-            
-            
-            
-        }else{
-            appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
-            appendValue(hd: "Status :", val: Data["status"] as? String ?? "")
-            appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
-            appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "")
-            appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "")
-           
-        }
+        appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
+        appendValue(hd: "Status :", val: Data["status"] as? String ?? "")
+        appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
+        appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "")
+        appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "")
         makeCellHeight()
         return getTableHeight()
     }
     
     private func setTableValueBunker(Data: [String: Any]) -> CGFloat {
-        appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
-        appendValue(hd: "Status :", val: Data["status"] as? String ?? "")
-        appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")")
-        appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data))
-        appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "")
-        appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data))
+        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+        if  tmpArrAdvanceLoading.count > 0 {
+            for item in tmpArrAdvanceLoading where item["alr_status"] as? String == "WAITING APPROVE" {
+                appendValue(hd: "Purchase No. :", val: item["alr_row_no"] as? String ?? "")
+                appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING")
+                appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")")
+                appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data))
+                appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "")
+                appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data))
+            }
+            if  tmpArrContractData.count > 0 {
+                for item in tmpArrContractData where item["caf_status"] as? String == "WAITING APPROVE" {
+                    appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "")
+                    appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
+                    appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")")
+                    appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data))
+                    appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "")
+                    appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data))
+                }
+            }
+        }else {
+                appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
+                appendValue(hd: "Status :", val: Data["status"] as? String ?? "")
+                appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")")
+                appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data))
+                appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "")
+                appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data))
+        }
         makeCellHeight()
         return getTableHeight()
     }

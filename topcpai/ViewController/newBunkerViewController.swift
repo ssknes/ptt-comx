@@ -117,26 +117,83 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                 for i in 0...count{
                     var muArr = [[String: Any]]()
                     for data in dataDict[System.Bunker] as! [[String : Any]] {
-                        log.info("LLLLLLLLL ======>>>> \(data)")
-                        if (data["status"] as? String ?? "") == self.statusArr[i]{
-//                            log.info("DDDDDDDDDDDD ======>>>> \(data)")
+                       if i == 0{
+                        if (data["status"] as? String ?? "") == self.statusArr[0] {
                             muArr.append(data)
                         }
+                        if (data["status"] as? String ?? "") == self.statusArr[1] {
+                           let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+                           let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+                            if(tmpAdvanceLoading.count > 0){
+                                for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[0] {
+                                   muArr.append(data)
+                                }
+                                for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
+                                    if(tmpContractData.count > 0){
+                                        for item in tmpContractData where item["caf_status"] as? String == self.statusArr[0]{
+                                            muArr.append(data)
+                                        }
+                                    }
+                                }
+                            }}}
+                        
+                         if i == 1{
+                            if (data["status"] as? String ?? "") == self.statusArr[1] {
+                                 muArr.append(data)
+                            }
+                         }
+                        
+                        if i == 2{
+                           if (data["status"] as? String ?? "") == self.statusArr[1] {
+                              let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+                              let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+                               if(tmpAdvanceLoading.count > 0){
+                                   for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
+                                       if(tmpContractData.count > 0){
+                                       }else{
+                                        muArr.append(data)
+                                    }
+                                   }
+                               }}
+                        }
+                        
+                        if i == 3{
+                           if (data["status"] as? String ?? "") == self.statusArr[1] {
+                              let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+                              let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+                               if(tmpAdvanceLoading.count > 0){
+                                   for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
+                                       if(tmpContractData.count > 0){
+                                        for item in tmpContractData where item["caf_status"] as? String == self.statusArr[1]{
+                                            muArr.append(data)
+                                        }
+                                       }
+                                   }
+                               }}
+                            }
+                        
+                        if i == 4{
+                           if (data["status"] as? String ?? "") == self.statusArr[4] {
+                                muArr.append(data)
+                           }
+                        }
                     }
+
                     muArr = DataUtils.shared.getSortedByDateData(inputArr: muArr)
                    
                     var fuArr = [[String : Any]]()
                     fuArr = muArr.filter({ (text) -> Bool in
                         return DataUtils.shared.getFilterResult(data: text, text: self.searchText)
                     })
-                    log.info("DDDDDDDDDDDD ======>>>> \(muArr)")
+                    
+//                    log.info("muArr ======>>>>>> \(muArr)")
                     self.FullDataSource.append(muArr)
-                    log.info("YYYYYYYYYY ======>>>> \(self.FullDataSource)")
-//                    if self.bunkerFilter.checkEmptyText() {
-//                        self.FullFiltered.append(muArr)
-//                    } else {
-//                        self.FullFiltered.append(fuArr)
-//                    }
+                    
+                    if self.bunkerFilter.checkEmptyText() {
+                        self.FullFiltered.append(muArr)
+                    } else {
+                        self.FullFiltered.append(fuArr)
+                    }
                 }
                 
                 for i in 0...(tabArr.count - 1) {

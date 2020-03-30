@@ -44,8 +44,7 @@ class BunkerDataCell: BaseDataCell {
         let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
         
         if  tmpArrAdvanceLoading.count > 0 {
-            for item in tmpArrAdvanceLoading where item["alr_status"] as? String != "APPROVED" {
-//                keyCell = 4
+            for item in tmpArrAdvanceLoading where item["alr_status"] as? String == "WAITING APPROVE" {
                 appendValue(hd: "Purchase No. :", val: item["alr_row_no"] as? String ?? "-", noValueHide: false)
                 appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
                 appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING", noValueHide: false)
@@ -62,38 +61,34 @@ class BunkerDataCell: BaseDataCell {
                      
                 appendValue(hd: "Location :", val: Data["supplying_location"] as? String ?? "", noValueHide: false)
                 appendValue(hd: "Delivery Date :", val: BunkerCellUtility.Share.getDeliverDate(data: Data), noValueHide: false)
-                appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reason"] as? String ?? "", noValueHide: false)
+                appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
                 appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
                 appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
             }
-            for item in tmpArrAdvanceLoading where item["alr_status"] as? String == "APPROVED" {
-//                keyCell = 5
-                for item in tmpArrContractData{
-                   appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "-", noValueHide: false)
-                   appendValue(hd: "contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
-                   appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
-                   appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
-                   appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
-                   appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
-                   appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data), noValueHide: false)
-                   if type == "VESSEL" {
-                       appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.joinUnitPrice(data: Data), noValueHide: false)
-                       appendValue(hd: "Total Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
-                   } else {
-                       appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
-                   }
-                        
-                   appendValue(hd: "Location :", val: Data["supplying_location"] as? String ?? "", noValueHide: false)
-                   appendValue(hd: "Delivery Date :", val: BunkerCellUtility.Share.getDeliverDate(data: Data), noValueHide: false)
-                   appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "-", noValueHide: false)
-                   appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
-                   appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+            if  tmpArrContractData.count > 0 {
+                for item in tmpArrContractData where item["caf_status"] as? String == "WAITING APPROVE" {
+                    appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "-", noValueHide: false)
+                    appendValue(hd: "contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
+                    appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
+                    appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
+                    appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data), noValueHide: false)
+                    if type == "VESSEL" {
+                        appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.joinUnitPrice(data: Data), noValueHide: false)
+                        appendValue(hd: "Total Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+                    } else {
+                        appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+                    }
+                         
+                    appendValue(hd: "Location :", val: Data["supplying_location"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Delivery Date :", val: BunkerCellUtility.Share.getDeliverDate(data: Data), noValueHide: false)
+                    appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "-", noValueHide: false)
+                    appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+                    appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
                 }
-                
             }
-            
         }else {
-//              keyCell = 2
               appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
               appendValue(hd: "Status :", val: Data["status"] as? String ?? "", noValueHide: false)
               appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
