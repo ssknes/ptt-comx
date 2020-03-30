@@ -766,4 +766,54 @@ class DataUtils {
         UIGraphicsEndImageContext()
         return result
     }
+    
+    func getResultDataAdvanceLoading(data: [String: Any]) -> [String: Any]{
+        var transDict = [String: Any]()
+        let tmpArrAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+            transDict = data
+        for item in tmpArrAdvanceLoading {
+            var tempAdvance = [[String: Any]]()
+            var tempContract = [[String: Any]]()
+            var tmp = [String: Any]()
+            tmp["alr_trans_id"] = item["alr_trans_id"] as? String ?? "-"
+            tmp["alr_approval_type"] = item["alr_approval_type"] as? String ?? "-"
+            tmp["alr_status"] = item["alr_status"] as? String ?? "-"
+            tmp["alr_row_no"] = item["alr_row_no"] as? String ?? "-"
+            tmp["alr_is_need_to_request"] = item["alr_is_need_to_request"] as? String ?? "-"
+            tmp["alr_request_reason"] = item["alr_request_reason"] as? String ?? "-"
+            tmp["alr_customer"] = item["alr_customer"] as? String ?? "-"
+            tmp["alr_supplier"] = item["alr_supplier"] as? String ?? "-"
+            tmp["alr_material"] = item["alr_material"] as? String ?? "-"
+            tempAdvance.append(tmp)
+            transDict["advance_loading_request_data"] = tempAdvance
+            transDict["contract_data"] = tempContract
+              return transDict
+       }
+        return transDict
+    }
+    
+    func getResultDataContracData(data: [String: Any]) -> [String: Any]{
+        var transDict = [String: Any]()
+        let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+            transDict = data
+        for item in tmpContractData {
+            var tempAdvance = [[String: Any]]()
+            var tempContract = [[String: Any]]()
+            var tmp = [String: Any]()
+            tmp["caf_trans_id"] = item["caf_trans_id"] as? String ?? "-"
+            tmp["caf_approval_type"] = item["caf_approval_type"] as? String ?? "-"
+            tmp["caf_status"] = item["caf_status"] as? String ?? "-"
+            tmp["caf_contract_no"] = item["caf_contract_no"] as? String ?? "-"
+            tmp["caf_is_cap_authorize"] = item["caf_is_cap_authorize"] as? String ?? "-"
+            tmp["caf_final_documents"] = item["caf_final_documents"] as? String ?? "-"
+            tmp["caf_customer"] = item["caf_customer"] as? String ?? "-"
+            tmp["caf_supplier"] = item["caf_supplier"] as? String ?? "-"
+            tmp["caf_materials"] = item["caf_materials"] as? String ?? "-"
+            tempContract.append(tmp)
+            transDict["advance_loading_request_data"] = tempAdvance
+            transDict["contract_data"] = tempContract
+              return transDict
+       }
+        return transDict
+    }
 }

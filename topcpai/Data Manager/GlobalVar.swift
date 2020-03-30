@@ -20,6 +20,8 @@ class GlobalVar {
 
     let defaults = UserDefaults.standard
     
+    var selectedTap = 0
+    
     var appVersion = Bundle.main.releaseVersionNumber
     
     var userInfo: [AnyHashable : Any]!

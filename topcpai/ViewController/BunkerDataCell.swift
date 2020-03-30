@@ -44,10 +44,14 @@ class BunkerDataCell: BaseDataCell {
         let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
         
         if  tmpArrAdvanceLoading.count > 0 {
-            for item in tmpArrAdvanceLoading where item["alr_status"] as? String == "WAITING APPROVE" {
+            for item in tmpArrAdvanceLoading {
                 appendValue(hd: "Purchase No. :", val: item["alr_row_no"] as? String ?? "-", noValueHide: false)
                 appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
+                if(item["alr_status"] as? String == "WAITING APPROVE"){
                 appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING", noValueHide: false)
+                }else{
+                appendValue(hd: "Status :", val: item["alr_status"] as? String ?? "", noValueHide: false)
+                }
                 appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
                 appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
                 appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
@@ -64,12 +68,18 @@ class BunkerDataCell: BaseDataCell {
                 appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
                 appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
                 appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+                makeCellHeight()
             }
-            if  tmpArrContractData.count > 0 {
-                for item in tmpArrContractData where item["caf_status"] as? String == "WAITING APPROVE" {
+    
+        }else if tmpArrContractData.count > 0 {
+                for item in tmpArrContractData {
                     appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "-", noValueHide: false)
-                    appendValue(hd: "contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+                    if(item["caf_status"] as? String == "WAITING APPROVE"){
                     appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
+                    }else {
+                    appendValue(hd: "Status :", val: item["caf_status"] as? String ?? "", noValueHide: false)
+                    }
                     appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
                     appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
                     appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
@@ -86,9 +96,9 @@ class BunkerDataCell: BaseDataCell {
                     appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "-", noValueHide: false)
                     appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
                     appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+                    makeCellHeight()
                 }
-            }
-        }else {
+            }else {
               appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
               appendValue(hd: "Status :", val: Data["status"] as? String ?? "", noValueHide: false)
               appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
@@ -107,9 +117,8 @@ class BunkerDataCell: BaseDataCell {
               
               appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
               appendValue(hd: "Requested By :", val: Data["create_by"] as? String ?? "", noValueHide: false)
+              makeCellHeight()
         }
-        
-        makeCellHeight()
         conTableView.constant = getTableHeight()
         mainTableView.reloadData()
         return getTableHeight() + GlobalVar.sharedInstance.detailViewGap

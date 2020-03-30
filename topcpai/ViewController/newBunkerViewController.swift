@@ -126,16 +126,17 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                            let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
                             if(tmpAdvanceLoading.count > 0){
                                 for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[0] {
-                                   muArr.append(data)
+                                    let result = DataUtils.shared.getResultDataAdvanceLoading(data:data)
+                                   muArr.append(result)
                                 }
-                                for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
-                                    if(tmpContractData.count > 0){
-                                        for item in tmpContractData where item["caf_status"] as? String == self.statusArr[0]{
-                                            muArr.append(data)
-                                        }
-                                    }
+                            }
+                            if(tmpContractData.count > 0){
+                                for item in tmpContractData where item["caf_status"] as? String == self.statusArr[0] {
+                                    let result = DataUtils.shared.getResultDataContracData(data:data)
+                                    muArr.append(result)
                                 }
-                            }}}
+                            }
+                        }}
                         
                          if i == 1{
                             if (data["status"] as? String ?? "") == self.statusArr[1] {
@@ -146,30 +147,23 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                         if i == 2{
                            if (data["status"] as? String ?? "") == self.statusArr[1] {
                               let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
-                              let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
                                if(tmpAdvanceLoading.count > 0){
                                    for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
-                                       if(tmpContractData.count > 0){
-                                       }else{
-                                        muArr.append(data)
-                                    }
+                                       let ttt = DataUtils.shared.getResultDataAdvanceLoading(data:data)
+                                       muArr.append(ttt)
                                    }
-                               }}
+                               }
                         }
                         
                         if i == 3{
                            if (data["status"] as? String ?? "") == self.statusArr[1] {
-                              let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
                               let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
-                               if(tmpAdvanceLoading.count > 0){
-                                   for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
-                                       if(tmpContractData.count > 0){
-                                        for item in tmpContractData where item["caf_status"] as? String == self.statusArr[1]{
-                                            muArr.append(data)
-                                        }
-                                       }
+                                if(tmpContractData.count > 0){
+                                   for item in tmpContractData where item["caf_status"] as? String == self.statusArr[1] {
+                                       let ttt = DataUtils.shared.getResultDataContracData(data:data)
+                                       muArr.append(ttt)
                                    }
-                               }}
+                               }}}
                             }
                         
                         if i == 4{
@@ -186,9 +180,9 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                         return DataUtils.shared.getFilterResult(data: text, text: self.searchText)
                     })
                     
-//                    log.info("muArr ======>>>>>> \(muArr)")
+                    log.info("muArr ======>>>>>> \(muArr)")
                     self.FullDataSource.append(muArr)
-                    
+
                     if self.bunkerFilter.checkEmptyText() {
                         self.FullFiltered.append(muArr)
                     } else {
@@ -514,6 +508,8 @@ extension newBunkerViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func doSelectTap(Selected : Int) {
+
+        GlobalVar.sharedInstance.selectedTap = Selected
         self.selectedTap = Selected
         self.mainTableView.reloadData()
         self.mainCollectionView.reloadData()

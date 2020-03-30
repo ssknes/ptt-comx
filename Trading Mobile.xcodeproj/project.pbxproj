@@ -1957,7 +1957,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pttict.topcpai;
+				PRODUCT_BUNDLE_IDENTIFIER = th.co.ipassion.cat.smd;
 				PRODUCT_NAME = "Trading Mobile";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "InHouse-CPAI";
