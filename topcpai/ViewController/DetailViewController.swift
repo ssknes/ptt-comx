@@ -65,19 +65,53 @@ class DetailViewController: BaseViewController {
         self.progressHUD = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         self.progressHUD.detailsLabel.text = "Loading Detail..."
         log.info("dataDict 67  \(DataDict)")
-        APIManager.shareInstance.getActionButton(Data: DataDict, callback: { (success, xmlError, dataDict) in
-            self.progressHUD.hide(animated: true)
-            if success {
-                for x in dataDict where x.name.lowercased() == "certified" {
-                    x.name = "ENDORSE"
-                }
-                log.info("getButtonData \(dataDict)")
-                self.arrButton = DataUtils.shared.getSortedArrButton(data: dataDict)
-                log.info("getButtonData2 \( self.arrButton)")
+        let tmpArrAdvanceLoading = DataDict["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = DataDict["contract_data"] as? [[String: Any]] ?? []
+        
+        if  tmpArrAdvanceLoading.count > 0 {
+            if  tmpArrContractData.count > 0 {
+            advanceButton(Data:DataDict)
+            }else{
+            advanceButton(Data:DataDict)
             }
-            self.initView()
-            self.mainTableView.reloadData()
-        })
+            
+        }else{
+            APIManager.shareInstance.getActionButton(Data: DataDict, callback: { (success, xmlError, dataDict) in
+                  self.progressHUD.hide(animated: true)
+                  if success {
+                      for x in dataDict where x.name.lowercased() == "certified" {
+                          x.name = "ENDORSE"
+                      }
+                      log.info("getButtonData \(String(describing: dataDict))")
+                      self.arrButton = DataUtils.shared.getSortedArrButton(data: dataDict)
+
+                  }
+                  self.initView()
+                  self.mainTableView.reloadData()
+              })
+        }
+    }
+    func advanceButton(Data:[String: Any]) {
+       let rejectBtn = Button()
+        let approveBtn = Button()
+        var dataArray = [Button]()
+        let system = DataUtils.shared.SysName(DataDict["system"] as? String ?? "")
+        var dataDict = Dictionary<String, Any>()
+        rejectBtn.name = "REJECT"
+        rejectBtn.page_url = "reject2"
+        rejectBtn.page_url = "reject2"
+        dataArray.append(rejectBtn)
+        
+        approveBtn.name = "APPROVE"
+        approveBtn.page_url = "reject2"
+        approveBtn.page_url = "reject2"
+        dataArray.append(approveBtn)
+        
+        dataDict[system] = dataArray
+        self.arrButton = DataUtils.shared.getSortedArrButton(data:  dataDict[system] as! [Button])
+        self.progressHUD.hide(animated: true)
+        self.initView()
+        self.mainTableView.reloadData()
     }
     
     func initView() {
