@@ -79,7 +79,7 @@ class NewPafCell: BaseDataCell {
             }
             
         }else {
-              keyCell = 2
+              keyCell = 3
               appendValue(hd: "Reference No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
               appendValue(hd: "Status :", val: Data["doc_status"] as? String ?? "", noValueHide: false)
                    

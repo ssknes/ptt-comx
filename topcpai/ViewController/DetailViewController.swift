@@ -189,7 +189,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! BunkerDataCell
             cell.txtBrief = self.briefText
             cell.btnData = arrButton
-            viewHeight  = cell.setCell(Data: DataDict as! [String : String], isExpand: true)
+            viewHeight  = cell.setCell(Data: DataDict , isExpand: true)
             cell.BaseDelegate = self
             cell.btnCollection.reloadData()
             return cell

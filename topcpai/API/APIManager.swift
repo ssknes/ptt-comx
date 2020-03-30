@@ -231,10 +231,12 @@ class APIManager {
                     // Parse extra xml
                     let availableData = xmlDoc.root["extra_xml"].xml
                     let dataString = self.replaceUnescapeButtonString(text: availableData)
-                    log.info("getzbutton dataString \(dataString)")
+                    log.info("getavailableData \(availableData)")
+                    print(">>>>")
+                    print(availableData)
                     let decodedDataXML = self.setupXMLFromString(text: dataString).root[self.getButtonKey(system: system)].children
                     var dataArray = [Button]()
-                      log.info("dataArray dataString \(dataArray)")
+                      print("dataArray dataString \(dataArray)")
                     for data in decodedDataXML {
                         let newButton = Button()
                         

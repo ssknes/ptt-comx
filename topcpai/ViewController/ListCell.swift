@@ -162,11 +162,28 @@ class ListCell: UITableViewCell {
     }
     
     private func setTableValueCrudeP(Data: [String: Any]) -> CGFloat {
-        appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
-        appendValue(hd: "Status :", val: Data["status"] as? String ?? "")
-        appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
-        appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "")
-        appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "")
+        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+        
+        if  tmpArrAdvanceLoading.count > 0 {
+            for item in tmpArrAdvanceLoading where item["alr_status"] as? String != "APPROVED" {
+                appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
+                appendValue(hd: "Status :", val: "Waiting Advance Loading" as? String ?? "")
+                appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
+                appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "")
+                appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "")
+            }
+            
+            
+            
+        }else{
+            appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "")
+            appendValue(hd: "Status :", val: Data["status"] as? String ?? "")
+            appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "")
+            appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "")
+            appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "")
+           
+        }
         makeCellHeight()
         return getTableHeight()
     }
