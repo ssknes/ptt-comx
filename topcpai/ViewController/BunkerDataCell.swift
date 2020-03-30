@@ -27,6 +27,7 @@ class BunkerDataCell: BaseDataCell {
     }
     
     func setCell(Data: [String: Any], isExpand: Bool) -> CGFloat {
+        log.info("dataaa ======>>>> \(Data)")
         addDashLine(layer: vwLine.layer)
         type = Data["type"] as? String ?? ""
         transaction_id = Data["transaction_id"] as? String ?? ""
@@ -39,27 +40,74 @@ class BunkerDataCell: BaseDataCell {
         header.removeAll()
         cellHeight.removeAll()
         
-        appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
-        appendValue(hd: "Advance For :", val: Data["advance_no"] as? String ?? "", noValueHide: false)
-        appendValue(hd: "Status :", val:Data["status"] as? String ?? "", noValueHide: false)
-        appendValue(hd: "Contract No :", val: "Wating API" as? String ?? "", noValueHide: false)
-        appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
-        appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
-        appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
-        appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data), noValueHide: false)
-        if type == "VESSEL" {
-            appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.joinUnitPrice(data: Data), noValueHide: false)
-            appendValue(hd: "Total Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
-        } else {
-            appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+        
+        if  tmpArrAdvanceLoading.count > 0 {
+            for item in tmpArrAdvanceLoading where item["alr_status"] as? String == "WAITING APPROVE" {
+                appendValue(hd: "Purchase No. :", val: item["alr_row_no"] as? String ?? "-", noValueHide: false)
+                appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
+                appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING", noValueHide: false)
+                appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
+                appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
+                appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
+                appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data), noValueHide: false)
+                if type == "VESSEL" {
+                    appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.joinUnitPrice(data: Data), noValueHide: false)
+                    appendValue(hd: "Total Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+                } else {
+                    appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+                }
+                     
+                appendValue(hd: "Location :", val: Data["supplying_location"] as? String ?? "", noValueHide: false)
+                appendValue(hd: "Delivery Date :", val: BunkerCellUtility.Share.getDeliverDate(data: Data), noValueHide: false)
+                appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
+                appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+                appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+            }
+            if  tmpArrContractData.count > 0 {
+                for item in tmpArrContractData where item["caf_status"] as? String == "WAITING APPROVE" {
+                    appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "-", noValueHide: false)
+                    appendValue(hd: "contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
+                    appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
+                    appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
+                    appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data), noValueHide: false)
+                    if type == "VESSEL" {
+                        appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.joinUnitPrice(data: Data), noValueHide: false)
+                        appendValue(hd: "Total Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+                    } else {
+                        appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+                    }
+                         
+                    appendValue(hd: "Location :", val: Data["supplying_location"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Delivery Date :", val: BunkerCellUtility.Share.getDeliverDate(data: Data), noValueHide: false)
+                    appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "-", noValueHide: false)
+                    appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+                    appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "", noValueHide: false)
+                }
+            }
+        }else {
+              appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+              appendValue(hd: "Status :", val: Data["status"] as? String ?? "", noValueHide: false)
+              appendValue(hd: "Vessle :", val: "\(Data["vessel"] as? String ?? "") \(Data["trip_no"] as? String ?? "")", noValueHide: false)
+              appendValue(hd: "Grade :", val: BunkerCellUtility.Share.getGrade(data: Data), noValueHide: false)
+              appendValue(hd: "Supplier :", val: Data["supplier"] as? String ?? "", noValueHide: false)
+              appendValue(hd: "Volume :", val: BunkerCellUtility.Share.getVolume(data: Data), noValueHide: false)
+              if type == "VESSEL" {
+                  appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.joinUnitPrice(data: Data), noValueHide: false)
+                  appendValue(hd: "Total Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+              } else {
+                  appendValue(hd: "Final Price :", val: BunkerCellUtility.Share.getTotalPrice(type: type, data: Data), noValueHide: false)
+              }
+            
+              appendValue(hd: "Location :", val: Data["supplying_location"] as? String ?? "", noValueHide: false)
+              appendValue(hd: "Delivery Date :", val: BunkerCellUtility.Share.getDeliverDate(data: Data), noValueHide: false)
+              
+              appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
+              appendValue(hd: "Requested By :", val: Data["create_by"] as? String ?? "", noValueHide: false)
         }
-        appendValue(hd: "Location :", val: Data["supplying_location"] as? String ?? "", noValueHide: false)
-        appendValue(hd: "Delivery Date :", val: BunkerCellUtility.Share.getDeliverDate(data: Data), noValueHide: false)
-        appendValue(hd: "Advance Loding Request :", val: "Yes", noValueHide: false)
-        appendValue(hd: "Advance Loding Request Reason :", val: "Still negotion", noValueHide: false)
-       
-        appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
-        appendValue(hd: "Requested By :", val: Data["create_by"] as? String ?? "", noValueHide: false)
         
         makeCellHeight()
         conTableView.constant = getTableHeight()
