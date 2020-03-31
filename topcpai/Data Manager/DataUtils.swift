@@ -767,6 +767,16 @@ class DataUtils {
         return result
     }
     
+    func getResultDataApprovalForm (data: [String: Any]) -> [String: Any]{
+        var transDict = [String: Any]()
+        var tempAdvance = [[String: Any]]()
+        var tempContract = [[String: Any]]()
+            transDict = data
+        transDict["advance_loading_request_data"] = tempAdvance
+        transDict["contract_data"] = tempContract
+        return transDict
+    }
+    
     func getResultDataAdvanceLoading(data: [String: Any]) -> [String: Any]{
         var transDict = [String: Any]()
         let tmpArrAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []

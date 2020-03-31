@@ -140,11 +140,8 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                         
                          if i == 1{
                             if (data["status"] as? String ?? "") == self.statusArr[1] {
-                                let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
-                                let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
-                                if(tmpAdvanceLoading.count == 0 && tmpContractData.count == 0 ){
-                                     muArr.append(data)
-                                }
+                                let result = DataUtils.shared.getResultDataApprovalForm(data:data)
+                                    muArr.append(result)
                             }
                          }
                         
@@ -153,8 +150,8 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                               let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
                                if(tmpAdvanceLoading.count > 0){
                                    for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
-                                       let ttt = DataUtils.shared.getResultDataAdvanceLoading(data:data)
-                                       muArr.append(ttt)
+                                       let result = DataUtils.shared.getResultDataAdvanceLoading(data:data)
+                                       muArr.append(result)
                                    }
                                }
                         }
@@ -164,8 +161,8 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                               let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
                                 if(tmpContractData.count > 0){
                                    for item in tmpContractData where item["caf_status"] as? String == self.statusArr[1] {
-                                       let ttt = DataUtils.shared.getResultDataContracData(data:data)
-                                       muArr.append(ttt)
+                                       let result = DataUtils.shared.getResultDataContracData(data:data)
+                                       muArr.append(result)
                                    }
                                }}}
                             }

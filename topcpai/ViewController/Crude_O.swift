@@ -43,6 +43,8 @@ class Crude_O: PropertyNames {
     var remaining_benefit_title = ""
     var deal_benefit = ""
     var remaining_benefit = ""
+    var advance_loading_request_data: Any?
+    var contract_data: Any?
     var brief = ""
     
     init() {
