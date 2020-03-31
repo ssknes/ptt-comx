@@ -47,6 +47,8 @@ struct System {
     static let Crude_O = "CRUDE_O"
     static let All_My_Task = "ALL"
     static let Hedge_Bot = "HEDG_BOT"
+    static let Advance_loading = "ADVANCE_LOADING"
+    static let Final_contract = "CONTRACT_DOCUMENT"
 }
 
 struct Status {

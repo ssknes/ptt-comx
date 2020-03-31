@@ -140,7 +140,11 @@ class newBunkerViewController: BaseListViewController { // UIViewController {
                         
                          if i == 1{
                             if (data["status"] as? String ?? "") == self.statusArr[1] {
-                                 muArr.append(data)
+                                let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+                                let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+                                if(tmpAdvanceLoading.count == 0 && tmpContractData.count == 0 ){
+                                     muArr.append(data)
+                                }
                             }
                          }
                         

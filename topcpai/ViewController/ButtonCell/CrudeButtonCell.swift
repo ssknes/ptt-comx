@@ -56,6 +56,7 @@ class CrudeButtonCell: UICollectionViewCell {
     }
     
     private func getSystemName() -> String {
+        log.info("systemsystemsystem\(system)")
         return DataUtils.shared.SysName(system)
     }
     
@@ -211,6 +212,15 @@ class CrudeButtonCell: UICollectionViewCell {
                 }
                 self.doButtonProcess(message: tmp)
             })
+            case System.Advance_loading:
+            return getDefaultAlert(title: getApproveTitle(), message: getApproveMessage(), Ok: "OK", Cancel: "Cancel", okAction: { (message) in
+                var tmp = message
+                log.info("case adv")
+                if message.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+                    tmp = "-"
+                }
+                self.doAdvanceButtonProcess(message: tmp)
+            })
         default: // Crude
             return getDefaultAlert(title: getApproveTitle(), message: getApproveMessage(), Ok: "Yes", Cancel: "No", okAction: { (message) in
                 self.doButtonProcess(message: "-")
@@ -354,6 +364,13 @@ class CrudeButtonCell: UICollectionViewCell {
         let cancelAction = UIAlertAction.init(title: Cancel, style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         return alert
+    }
+    
+    private func doAdvanceButtonProcess(message: String) {
+        self.delegate?.showLoadingHud(text: "Updating Transaction...")
+        APIManager.shareInstance.sendXMLFromAdvanceButton(xml: btnAction.call_xml) { (success, xmlError, dataDict) in
+            self.delegate?.onActionButtonResult(Success: success, xmlError: xmlError, dataDict: dataDict)
+        }
     }
     
     private func doButtonProcess(message: String) {

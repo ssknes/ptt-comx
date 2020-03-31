@@ -70,7 +70,7 @@ class DetailViewController: BaseViewController {
         
         if  tmpArrAdvanceLoading.count > 0 {
             if  tmpArrContractData.count > 0 {
-            advanceButton(Data:DataDict)
+            finalButton(Data:DataDict)
             }else{
             advanceButton(Data:DataDict)
             }
@@ -92,6 +92,30 @@ class DetailViewController: BaseViewController {
         }
     }
     func advanceButton(Data:[String: Any]) {
+        let bodyString = APIManager.shareInstance.advanceLoadingXML(Data: Data,system:System.Advance_loading)
+        log.debug("bodyStringBTN \(bodyString)")
+        let rejectBtn = Button()
+        let approveBtn = Button()
+        var dataArray = [Button]()
+        let system = DataUtils.shared.SysName(System.Advance_loading as? String ?? "")
+        var dataDict = Dictionary<String, Any>()
+        rejectBtn.name = "REJECT"
+        rejectBtn.page_url = "reject2"
+        rejectBtn.call_xml = ""
+        dataArray.append(rejectBtn)
+        
+        approveBtn.name = "APPROVE"
+        approveBtn.page_url = "reject2"
+        approveBtn.call_xml = bodyString
+        dataArray.append(approveBtn)
+        
+        dataDict[system] = dataArray
+        self.arrButton = DataUtils.shared.getSortedArrButton(data:  dataDict[system] as! [Button])
+        self.progressHUD.hide(animated: true)
+        self.initView()
+        self.mainTableView.reloadData()
+    }
+    func finalButton(Data:[String: Any]) {
        let rejectBtn = Button()
         let approveBtn = Button()
         var dataArray = [Button]()

@@ -44,6 +44,7 @@ class BunkerDataCell: BaseDataCell {
         let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
         
         if  tmpArrAdvanceLoading.count > 0 {
+            system = System.Advance_loading
             for item in tmpArrAdvanceLoading {
                 appendValue(hd: "Purchase No. :", val: item["alr_row_no"] as? String ?? "-", noValueHide: false)
                 appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
@@ -72,6 +73,7 @@ class BunkerDataCell: BaseDataCell {
             }
     
         }else if tmpArrContractData.count > 0 {
+              system = System.Final_contract
                 for item in tmpArrContractData {
                     appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "-", noValueHide: false)
                     appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)

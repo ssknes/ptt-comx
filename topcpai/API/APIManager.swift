@@ -184,7 +184,12 @@ class APIManager {
         }
     }
     private func getTransactionID(system: String, Data: [String: Any]) -> String {
+        log.info("tst \(Data)")
         switch system {
+        case System.Advance_loading:
+            return Data["alr_trans_id"] as? String ?? ""
+        case System.Final_contract:
+            return Data["caf_rowid"] as? String ?? ""
         case System.Hedge_Bot:
             return Data["bot_rowid"] as? String ?? ""
         case System.Hedge_tckt:
@@ -195,6 +200,54 @@ class APIManager {
             return Data["transaction_id"] as? String ?? ""
         }
     }
+    private func getAdvanceTransactionID(system: String, Data: String) -> String {
+        
+           
+        switch system {
+        case System.Final_contract:
+            return Data as? String ?? ""
+        case System.Advance_loading:
+            return Data as? String ?? ""
+        default:
+            return Data as? String ?? ""
+        }
+       }
+    
+    
+    func advanceLoadingXML(Data: [String: Any],system:String) -> String{
+        
+    let doc_type = DataUtils.shared.SysName(Data["system"] as? String ?? "")
+//    let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+//        let tmpArrContractData = Data["contract_data"] as? [String: Any] ?? [:]
+//    log.info("tst \(tmpArrAdvanceLoading)")
+//      log.info("tst \(tmpArrContractData)")
+//
+//        if  tmpArrAdvanceLoading.count > 0 &&  system == System.Advance_loading{
+//
+//                     if  tmpArrAdvanceLoading.count > 0 && system == System.Final_contract {
+//                         for item in tmpArrContractData {
+//                              xx = item["caf_trans_id"] as! String
+//                         }
+//
+//                     }else{
+//                         for item in tmpArrAdvanceLoading {
+//                               xx = item["alr_trans_id"] as! String
+//                         }
+//                     }
+//                 }
+        var transaction_id : String
+        if system == System.Advance_loading {
+            transaction_id = getTransactionID(system: system, Data: Data)
+        }else{
+            transaction_id = getTransactionID(system: system, Data: Data)
+        }
+        
+        
+        let bodyString = xmlBuilder.getAdvanceXML(system: system, type: doc_type, transaction_id: transaction_id )
+        
+        return bodyString
+    }
+    
     
     func getActionButton(Data: [String: Any], callback: ((_ success: Bool, _ fail: MyError, _ data: [Button]) -> Void)?) {
         //init First Data
@@ -260,6 +313,38 @@ class APIManager {
                     log.error("xmlDoc nil: \(String(describing: xmlDoc))")
                     let err = MyError(message: MyMessage.failedToParseReponseBody)
                     callback?(false, err, dataDict[system] as? [Button] ?? [])
+                }
+            })
+        }
+    }
+    
+    func sendXMLFromAdvanceButton( xml: String, callback: ((_ success: Bool, _ fail: MyError, _ dataDict: [String: Any]) -> Void)?) {
+        let dataDict = Dictionary<String, Any>()
+        
+        if !connectedToNetwork(){
+            let err = MyError(message: "No Internet Connection.")
+            callback?(false, err, dataDict)
+            return
+        }
+        httpClient.postAndDecodeData(path: Paths.defaultPath, body: (xml.data(using: .utf8))! as NSData) {
+            (decodedData, response, error) in
+            
+            self.setupXMLDocument(xmlData: decodedData!, response: response, error: error, callback: {
+                (success, xmlError, xmlDoc) in
+                
+                let errMsg = xmlError.message
+                
+                if !success {
+                    let err = MyError(message: errMsg)
+                    callback?(false, err, dataDict)
+                    return
+                } else {
+                    if let err = xmlDoc?.root.attributes["response_message"] {
+                        callback?(true, MyError(message: err), dataDict)
+                    } else {
+                        callback?(true, MyError(message: ""), dataDict)
+                    }
+                    return
                 }
             })
         }
