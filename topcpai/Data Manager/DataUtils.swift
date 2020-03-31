@@ -261,7 +261,6 @@ class DataUtils {
         let xmlDoc = xmlDoc!
         let availableData = xmlDoc.root["extra_xml"].xmlCompact
         let dataString = self.replaceUnescapeString(text: availableData)
-        log.info("dataString \(dataString)")
         if !dataString.contains("list_trx") {
             return getDataDictFromXMLPaf(System: system, Model: Product(), xmlDoc: xmlDoc, all: all)
         }
@@ -315,7 +314,10 @@ class DataUtils {
     }
     
     private func getDataItem(Model: PropertyNames, data: AEXMLElement, all: Bool) -> [String: Any] {
+        
         var transDict = [String: Any]()
+        var tmpArrAdvanceLoading = [[String: Any]]()
+        var tmpArrContractData = [[String: Any]]()
         if all {
             for key in Model.propertyNames() {
                 var notFound: Bool = true
@@ -341,13 +343,41 @@ class DataUtils {
             let temp = getDataItemCDS(Model: Crude_O(), data: item, all: all)
             transDict["reopt_transaction"] = temp
         }
+        
+        for item in data.children where item.name == "advance_loading_request_data" {
+            var tmpObj = [String: Any]()
+            for obj in item.children {
+              tmpObj[obj.name] = obj.value ?? "-"
+          }
+              tmpArrAdvanceLoading.append(tmpObj)
+            
+        }
+        
+        for item in data.children where item.name == "contract_data" {
+            var tmpObj = [String: Any]()
+            for obj in item.children {
+                tmpObj[obj.name] = obj.value ?? "-"
+            }
+            tmpArrContractData.append(tmpObj)
+        }
+        
+        
         for key in Model.propertyNames() {
             var value = data.attributes[key] ?? "-"
             if value.length == 0 {
                 value = "-"
             }
             transDict[key] = value
+            if tmpArrAdvanceLoading.count > 0 {
+//              log.info("data ======>>>>RRRRRRRR")
+              transDict["advance_loading_request_data"] = tmpArrAdvanceLoading
+          }
+            if tmpArrContractData.count > 0 {
+//              log.info("data ======>>>>HHHHHHHHH")
+              transDict["contract_data"] = tmpArrContractData
+           }
         }
+//         log.info("data ======>>>>QQQQQQQ\(transDict)")
         return transDict
     }
     
@@ -444,15 +474,18 @@ class DataUtils {
         return transDict
     }
     
+    
+    
     private func getDataItemPaf(Model: PropertyNames, data: AEXMLElement, all: Bool) -> [String: Any] {
         if !all {
             return [:]
         }
         var transDict = [String: Any]()
         var tmpArrAwarded = [[String: Any]]()
+        var tmpArrAdvanceLoading = [[String: Any]]()
+        var tmpArrContractData = [[String: Any]]()
         for key in Model.propertyNames() {
             for item in data.children where item.name == key {
-                
                 if key == "awaeded" {
                     var tmpObj = [String: Any]()
                     for obj in item.children {
@@ -475,9 +508,32 @@ class DataUtils {
                 } else {
                     transDict[key] = item.value
                 }
+                
+                if key == "advance_loading_request_data" {
+                    var tmpObj = [String: Any]()
+                    for obj in item.children {
+                        tmpObj[obj.name] = obj.value ?? "-"
+                    }
+                    tmpArrAdvanceLoading.append(tmpObj)
+                }
+                
+                if key == "contract_data" {
+                    var tmpObj = [String: Any]()
+                    for obj in item.children {
+                        tmpObj[obj.name] = obj.value ?? "-"
+                    }
+                    tmpArrContractData.append(tmpObj)
+                }
             }
+            
             if tmpArrAwarded.count > 0 {
                 transDict["awaeded"] = tmpArrAwarded
+            }
+            if tmpArrAdvanceLoading.count > 0 {
+                transDict["advance_loading_request_data"] = tmpArrAdvanceLoading
+            }
+            if tmpArrContractData.count > 0 {
+                transDict["contract_data"] = tmpArrContractData
             }
         }
         return transDict
@@ -514,6 +570,35 @@ class DataUtils {
                 }
                 transDict[key] = tempDict
             }
+            
+            if key == "advance_loading_request_data" && data[key] as? [Any] != nil {
+                var tempDict = [[String: Any]]()
+                let arrSubkey = Advance_loading().propertyNames()
+                for subItem in (data[key] as! [Any]) where subItem as? [String: Any] != nil {
+                    var tmp = [String: Any]()
+                    for subKey in arrSubkey {
+                        let value = (subItem as! [String: Any])[subKey] as? String ?? "-"
+                        tmp[subKey] = value
+                    }
+                    tempDict.append(tmp)
+                }
+                transDict[key] = tempDict
+            }
+            
+            if key == "contract_data" && data[key] as? [Any] != nil {
+                var tempDict = [[String: Any]]()
+                let arrSubkey = Contract_Data().propertyNames()
+                for subItem in (data[key] as! [Any]) where subItem as? [String: Any] != nil {
+                    var tmp = [String: Any]()
+                    for subKey in arrSubkey {
+                        let value = (subItem as! [String: Any])[subKey] as? String ?? "-"
+                        tmp[subKey] = value
+                    }
+                    tempDict.append(tmp)
+                }
+                transDict[key] = tempDict
+            }
+            
         }
         return transDict
     }
@@ -666,5 +751,65 @@ class DataUtils {
         let result : UIImage = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
         UIGraphicsEndImageContext()
         return result
+    }
+    
+    func getResultDataApprovalForm (data: [String: Any]) -> [String: Any]{
+        var transDict = [String: Any]()
+        var tempAdvance = [[String: Any]]()
+        var tempContract = [[String: Any]]()
+            transDict = data
+        transDict["advance_loading_request_data"] = tempAdvance
+        transDict["contract_data"] = tempContract
+        return transDict
+    }
+    
+    func getResultDataAdvanceLoading(data: [String: Any]) -> [String: Any]{
+        var transDict = [String: Any]()
+        let tmpArrAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+            transDict = data
+        for item in tmpArrAdvanceLoading {
+            var tempAdvance = [[String: Any]]()
+            var tempContract = [[String: Any]]()
+            var tmp = [String: Any]()
+            tmp["alr_trans_id"] = item["alr_trans_id"] as? String ?? "-"
+            tmp["alr_approval_type"] = item["alr_approval_type"] as? String ?? "-"
+            tmp["alr_status"] = item["alr_status"] as? String ?? "-"
+            tmp["alr_row_no"] = item["alr_row_no"] as? String ?? "-"
+            tmp["alr_is_need_to_request"] = item["alr_is_need_to_request"] as? String ?? "-"
+            tmp["alr_request_reason"] = item["alr_request_reason"] as? String ?? "-"
+            tmp["alr_customer"] = item["alr_customer"] as? String ?? "-"
+            tmp["alr_supplier"] = item["alr_supplier"] as? String ?? "-"
+            tmp["alr_material"] = item["alr_material"] as? String ?? "-"
+            tempAdvance.append(tmp)
+            transDict["advance_loading_request_data"] = tempAdvance
+            transDict["contract_data"] = tempContract
+              return transDict
+       }
+        return transDict
+    }
+    
+    func getResultDataContracData(data: [String: Any]) -> [String: Any]{
+        var transDict = [String: Any]()
+        let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+            transDict = data
+        for item in tmpContractData {
+            var tempAdvance = [[String: Any]]()
+            var tempContract = [[String: Any]]()
+            var tmp = [String: Any]()
+            tmp["caf_trans_id"] = item["caf_trans_id"] as? String ?? "-"
+            tmp["caf_approval_type"] = item["caf_approval_type"] as? String ?? "-"
+            tmp["caf_status"] = item["caf_status"] as? String ?? "-"
+            tmp["caf_contract_no"] = item["caf_contract_no"] as? String ?? "-"
+            tmp["caf_is_cap_authorize"] = item["caf_is_cap_authorize"] as? String ?? "-"
+            tmp["caf_final_documents"] = item["caf_final_documents"] as? String ?? "-"
+            tmp["caf_customer"] = item["caf_customer"] as? String ?? "-"
+            tmp["caf_supplier"] = item["caf_supplier"] as? String ?? "-"
+            tmp["caf_materials"] = item["caf_materials"] as? String ?? "-"
+            tempContract.append(tmp)
+            transDict["advance_loading_request_data"] = tempAdvance
+            transDict["contract_data"] = tempContract
+              return transDict
+       }
+        return transDict
     }
 }

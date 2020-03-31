@@ -91,15 +91,69 @@ class PafViewController: BaseListViewController {
                 for i in 0...count{
                     var muArr = [[String: Any]]()
                     for data in dataDict[System.Product] as! [[String : Any]] {
-                        if data["doc_status"] as! String == (self.statusArr[i]) {
-                            muArr.append(data)
+                      if i == 0{
+                       if (data["doc_status"] as? String ?? "") == self.statusArr[0] {
+                           muArr.append(data)
+                       }
+                       if (data["doc_status"] as? String ?? "") == self.statusArr[1] {
+                          let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+                          let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+                           if(tmpAdvanceLoading.count > 0){
+                               for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[0] {
+                                   let result = DataUtils.shared.getResultDataAdvanceLoading(data:data)
+                                  muArr.append(result)
+                               }
+                           }
+                           if(tmpContractData.count > 0){
+                               for item in tmpContractData where item["caf_status"] as? String == self.statusArr[0] {
+                                   let result = DataUtils.shared.getResultDataContracData(data:data)
+                                   muArr.append(result)
+                               }
+                           }
+                       }}
+                       
+                        if i == 1{
+                           if (data["doc_status"] as? String ?? "") == self.statusArr[1] {
+                               let result = DataUtils.shared.getResultDataApprovalForm(data:data)
+                                   muArr.append(result)
+                           }
                         }
-                    }
+                       
+                       if i == 2{
+                          if (data["doc_status"] as? String ?? "") == self.statusArr[1] {
+                             let tmpAdvanceLoading = data["advance_loading_request_data"] as? [[String: Any]] ?? []
+                              if(tmpAdvanceLoading.count > 0){
+                                  for item in tmpAdvanceLoading where item["alr_status"] as? String == self.statusArr[1] {
+                                      let ttt = DataUtils.shared.getResultDataAdvanceLoading(data:data)
+                                      muArr.append(ttt)
+                                  }
+                              }
+                       }
+                       
+                       if i == 3{
+                          if (data["doc_status"] as? String ?? "") == self.statusArr[1] {
+                             let tmpContractData = data["contract_data"] as? [[String: Any]] ?? []
+                               if(tmpContractData.count > 0){
+                                  for item in tmpContractData where item["caf_status"] as? String == self.statusArr[1] {
+                                      let ttt = DataUtils.shared.getResultDataContracData(data:data)
+                                      muArr.append(ttt)
+                                  }
+                              }}}
+                           }
+                       
+                       if i == 4{
+                          if (data["doc_status"] as? String ?? "") == self.statusArr[4] {
+                               muArr.append(data)
+                          }
+                       }
+                   }
+
                     muArr = DataUtils.shared.getSortedByDateData(inputArr: muArr)
                     var fuArr = [[String : Any]]()
                     fuArr = muArr.filter({ (text) -> Bool in
                         return DataUtils.shared.getFilterResult(data: text, text: searchText)
                     })
+                    log.info("muArr ======>>>>>> \(muArr)")
                     self.FullDataSource.append(muArr)
                     if self.Filter.checkEmptyText() {
                         self.FullFiltered.append(muArr)
@@ -349,7 +403,7 @@ extension PafViewController: UICollectionViewDelegateFlowLayout, UICollectionVie
                 (success, xmlError, xmlData) in
                 self.progressHUD.hide(animated: true)
                 let dataDict = DataUtils.shared.getDataDictFromXMLDoc(system: system, xmlDoc: xmlData, all: false)
-                
+               
                 self.doLoadDataSuccess(success: success, xmlError: xmlError, dataDict: dataDict)
             })
         }

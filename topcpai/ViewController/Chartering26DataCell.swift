@@ -26,6 +26,7 @@ class Chartering26DataCell: BaseDataCell {
     }
     
     func setCell(Data: [String: Any], isExpand: Bool) -> CGFloat {
+        log.info("dataaa11 ======>>>> \(Data)")
         addDashLine(layer: vwLine.layer)
         type = Data["type"] as? String ?? ""
         transaction_id = Data["transaction_id"] as? String ?? ""
@@ -38,7 +39,42 @@ class Chartering26DataCell: BaseDataCell {
         header.removeAll()
         cellHeight.removeAll()
         
-        appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+        
+        if tmpArrAdvanceLoading.count > 0{
+            for item in tmpArrAdvanceLoading {
+             appendValue(hd: "Document No. :", val: item["alr_row_no"] as? String ?? "", noValueHide: false)
+            }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+             appendValue(hd: "Document No. :", val: item["caf_contract_no"] as? String ?? "", noValueHide: false)
+            }
+        }else {
+           appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+        }
+        if tmpArrAdvanceLoading.count > 0 {
+            for item in tmpArrAdvanceLoading {
+                appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
+             if(item["alr_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING", noValueHide: false)
+            }else{
+                appendValue(hd: "Status :", val: item["alr_status"] as? String ?? "", noValueHide: false)
+            }
+          }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+                appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+               if(item["caf_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
+               }else {
+                appendValue(hd: "Status :", val: item["caf_status"] as? String ?? "", noValueHide: false)
+                }
+            }
+        }else{
+            appendValue(hd: "Status :", val: Data["status"] as? String ?? "", noValueHide: false)
+        }
+
         appendValue(hd: "Vessel :", val: Data["vessel"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Charterer :", val: Data["cust_name"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Ship broken :", val: CharteringCellUtils.Shared.getBrokerName(data: Data), noValueHide: false)
@@ -48,6 +84,15 @@ class Chartering26DataCell: BaseDataCell {
         appendValue(hd: "No Charter Out : Total Expense", val: "\(getCurrencyText(Data["no_total_ex"] as? String ?? "")) USD", noValueHide: false)
         appendValue(hd: "Charter Out : Total Expense", val: "\(getCurrencyText(Data["total_ex"] as? String ?? "")) USD", noValueHide: false)
         appendValue(hd: "Net Benefit :", val: "\(getCurrencyText(Data["net_benefit"] as? String ?? "")) USD", noValueHide: false)
+        if tmpArrAdvanceLoading.count > 0{
+            for item in tmpArrAdvanceLoading {
+              appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
+            }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+              appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "", noValueHide: false)
+            }
+        }
         appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
         makeCellHeight()
         conTableView.constant = getTableHeight()

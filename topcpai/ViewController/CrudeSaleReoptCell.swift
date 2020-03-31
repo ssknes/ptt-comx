@@ -52,6 +52,40 @@ class CrudeSaleReoptCell: BaseDataCell {
         header.removeAll()
         cellHeight.removeAll()
         
+        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+        if tmpArrAdvanceLoading.count > 0{
+            for item in tmpArrAdvanceLoading {
+             appendValue(hd: "Sale&Re-Optimization No. :", val: item["alr_row_no"] as? String ?? "", noValueHide: false)
+            }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+             appendValue(hd: "Sale&Re-Optimization No. :", val: item["caf_contract_no"] as? String ?? "", noValueHide: false)
+            }
+        }else {
+           appendValue(hd: "Sale&Re-Optimization No. :", val: Data["doc_no"] as? String ?? "", noValueHide: false)
+        }
+        if tmpArrAdvanceLoading.count > 0 {
+            for item in tmpArrAdvanceLoading {
+                appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
+             if(item["alr_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING", noValueHide: false)
+            }else{
+                appendValue(hd: "Status :", val: item["alr_status"] as? String ?? "", noValueHide: false)
+            }
+          }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+                appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+               if(item["caf_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
+               }else {
+                appendValue(hd: "Status :", val: item["caf_status"] as? String ?? "", noValueHide: false)
+                }
+            }
+        }else{
+            appendValue(hd: "Status :", val: Data["status"] as? String ?? "", noValueHide: false)
+        }
         appendValue(hd: "Sale&Re-Optimization No. :", val: Data["doc_no"] as? String ?? "-", noValueHide: false)
         appendValue(hd: "Purchased from", val: "", noValueHide: false)
         let tmp = Data["list_cdph"] as? [[String: Any]] ?? []
@@ -66,6 +100,15 @@ class CrudeSaleReoptCell: BaseDataCell {
         appendValue(hd: "\(Data["deal_benefit_title"] as? String ?? "-") :", val: Data["deal_benefit"] as? String ?? "-", noValueHide: true)
         appendValue(hd: "\(Data["remaining_benefit_title"] as? String ?? "-") :", val: Data["remaining_benefit"] as? String ?? "-", noValueHide: true)
         appendValue(hd: "Total benefit at TOP :", val: Data["total_benefit"] as? String ?? "-", noValueHide: false)
+        if tmpArrAdvanceLoading.count > 0{
+            for item in tmpArrAdvanceLoading {
+              appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
+            }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+              appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "", noValueHide: false)
+            }
+        }
         appendValue(hd: "Brief :", val:  self.getBriefText(def: Data["brief"] as? String ?? "-"), noValueHide: false)
         appendValue(hd: "Requested By :", val: Data["created_by"] as? String ?? "-", noValueHide: false)
         makeCellHeight()

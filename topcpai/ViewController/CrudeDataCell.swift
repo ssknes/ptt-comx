@@ -38,7 +38,41 @@ class CrudeDataCell: BaseDataCell {
         header.removeAll()
         cellHeight.removeAll()
         
-        appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+        
+        if tmpArrAdvanceLoading.count > 0{
+            for item in tmpArrAdvanceLoading {
+             appendValue(hd: "Purchase No. :", val: item["alr_row_no"] as? String ?? "", noValueHide: false)
+            }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+             appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "", noValueHide: false)
+            }
+        }else {
+           appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+        }
+        if tmpArrAdvanceLoading.count > 0 {
+            for item in tmpArrAdvanceLoading {
+                appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
+             if(item["alr_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING", noValueHide: false)
+            }else{
+                appendValue(hd: "Status :", val: item["alr_status"] as? String ?? "", noValueHide: false)
+            }
+          }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+                appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+               if(item["caf_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
+               }else {
+                appendValue(hd: "Status :", val: item["caf_status"] as? String ?? "", noValueHide: false)
+                }
+            }
+        }else{
+            appendValue(hd: "Status :", val: Data["status"] as? String ?? "", noValueHide: false)
+        }
         appendValue(hd: "Crude Name :", val: Data["product_name"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Supplier :", val: Data["supplier_name"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Quantity :", val: Data["volumes"] as? String ?? "", noValueHide: false)
@@ -50,6 +84,15 @@ class CrudeDataCell: BaseDataCell {
         appendValue(hd: "Benefit vs max price :", val: Data["margin"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Loading period :", val: Data["loading_period"] as? String ?? "", noValueHide: false)
         appendValue(hd: "Discharging period :", val: Data["discharging_period"] as? String ?? "", noValueHide: false)
+        if tmpArrAdvanceLoading.count > 0{
+            for item in tmpArrAdvanceLoading {
+              appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
+            }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+              appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "", noValueHide: false)
+            }
+        }
         appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
         appendValue(hd: "Requested By :", val: Data["create_by"] as? String ?? "", noValueHide: false)
         makeCellHeight()

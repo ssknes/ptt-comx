@@ -78,6 +78,7 @@ class CharteringDataCell: BaseDataCell {
     }
     
     func setCell(Data: [String: Any], isExpand: Bool) -> CGFloat {
+        log.info("dataaa222 ======>>>> \(Data)")
         addDashLine(layer: vwLine.layer)
         type = Data["type"] as? String ?? ""
         transaction_id = Data["transaction_id"] as? String ?? ""
@@ -91,11 +92,57 @@ class CharteringDataCell: BaseDataCell {
         cellHeight.removeAll()
         
         let funcID = Data["function_id"] as? String ?? ""
+        let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+        let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+        
         if funcID == "25" {
-            appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+            if tmpArrAdvanceLoading.count > 0{
+                for item in tmpArrAdvanceLoading {
+                 appendValue(hd: "Document No. :", val: item["alr_row_no"] as? String ?? "", noValueHide: false)
+                }
+            }else if tmpArrContractData.count > 0 {
+                for item in tmpArrContractData {
+                 appendValue(hd: "Document No. :", val: item["caf_contract_no"] as? String ?? "", noValueHide: false)
+                }
+            }else {
+               appendValue(hd: "Document No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+            }
         } else {
-            appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+            if tmpArrAdvanceLoading.count > 0{
+                for item in tmpArrAdvanceLoading {
+                  appendValue(hd: "Purchase No. :", val: item["alr_row_no"] as? String ?? "", noValueHide: false)
+                }
+            }else if tmpArrContractData.count > 0 {
+                for item in tmpArrContractData {
+                  appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "", noValueHide: false)
+                }
+            }else {
+              appendValue(hd: "Purchase No. :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+            }
         }
+        if tmpArrAdvanceLoading.count > 0 {
+            for item in tmpArrAdvanceLoading {
+                appendValue(hd: "Advance For :", val: Data["purchase_no"] as? String ?? "-", noValueHide: false)
+             if(item["alr_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING ADVANCE LOADING", noValueHide: false)
+            }else{
+                appendValue(hd: "Status :", val: item["alr_status"] as? String ?? "", noValueHide: false)
+            }
+          }
+        }else if tmpArrContractData.count > 0 {
+            for item in tmpArrContractData {
+                appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+               if(item["caf_status"] as? String == "WAITING APPROVE"){
+                appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
+               }else {
+                appendValue(hd: "Status :", val: item["caf_status"] as? String ?? "", noValueHide: false)
+                }
+            }
+        }else{
+            appendValue(hd: "Status :", val: Data["status"] as? String ?? "", noValueHide: false)
+        }
+        
+        
         appendValue(hd: "Vessel Name. :", val: Data["vessel"] as? String ?? "", noValueHide: false)
         
         if funcID != "7" {
@@ -156,9 +203,27 @@ class CharteringDataCell: BaseDataCell {
         if funcID != "25" {
             appendValue(hd: "War Risk/Arm Guard :", val: Data["exten_cost"] as? String ?? "", noValueHide: false)
             appendValue(hd: "Est. Freight (USD/BBL) :", val: Data["est_freight"] as? String ?? "", noValueHide: false)
+            if tmpArrAdvanceLoading.count > 0{
+                for item in tmpArrAdvanceLoading {
+                  appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
+                }
+            }else if tmpArrContractData.count > 0 {
+                for item in tmpArrContractData {
+                  appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "", noValueHide: false)
+                }
+            }
             appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
             appendValue(hd: "Requesed By :", val: Data["create_by"] as? String ?? "", noValueHide: false)
         } else {
+            if tmpArrAdvanceLoading.count > 0{
+                for item in tmpArrAdvanceLoading {
+                  appendValue(hd: "Advance Loading Request Reason :", val: item["alr_request_reson"] as? String ?? "", noValueHide: false)
+                }
+            }else if tmpArrContractData.count > 0 {
+                for item in tmpArrContractData {
+                  appendValue(hd: "Final Contract Documents :", val: item["caf_final_documents"] as? String ?? "", noValueHide: false)
+                }
+            }
             appendValue(hd: "Brief :", val: self.getBriefText(def: Data["brief"] as? String ?? "-") , noValueHide: false)
         }
         makeCellHeight()

@@ -32,10 +32,12 @@ class Bunker: PropertyNames {
     var delivery_date_to: String = ""
     var currency_symbol: String = ""
     var create_by: String = ""
+    var advance_loading_request_data: Any?
+    var contract_data: Any?
+
     
     var brief = ""
     init() {
         // do nothing
     }
-
 }
