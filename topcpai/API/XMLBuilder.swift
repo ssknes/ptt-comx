@@ -345,7 +345,7 @@ class XMLBuilder {
                     "mobile_flag" : "Y"]
         }
     }
-    func getAdvanceXML(system: String, type: String, transaction_id: String ,action: String) -> String {
+    func getAdvanceXML(system: String, type: String, transaction_id: String ,action: String,reason:String) -> String {
         let params = getActionButtonXMLParams(system: system, type: type, transaction_id: transaction_id, companycode: "companyCode")
         let funcID = "F10000114"
         
@@ -353,7 +353,7 @@ class XMLBuilder {
                       [
                           "trans_id": transaction_id,
                           "action": action,
-                          "reject_reason": "",
+                          "reject_reason": reason,
                       ]
                   ]
                   

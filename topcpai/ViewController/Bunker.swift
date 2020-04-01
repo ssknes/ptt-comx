@@ -15,6 +15,7 @@ class Bunker: PropertyNames {
     var status = ""
     var type = ""
     var system = ""
+    
     var system_type = ""
     var date_purchase: String = ""
     var purchase_no: String = ""

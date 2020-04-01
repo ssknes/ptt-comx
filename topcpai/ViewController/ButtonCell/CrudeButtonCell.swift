@@ -31,6 +31,7 @@ class CrudeButtonCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         btnAction.titleLabel?.lineBreakMode = .byWordWrapping
+        
     }
     
     func onButtonClick(_ dict: [String: Any], brief: String) {
@@ -39,14 +40,7 @@ class CrudeButtonCell: UICollectionViewCell {
         case "print":
             delegate?.onActionButtonPDF(button: btnAction)
         case "reject":
-            if btnAction.page_url == System.Advance_loading{
-                 log.info("btnAction.page_url A\(btnAction.page_url)")
-            }else if btnAction.page_url == System.Final_contract{
-                log.info("btnAction.page_url F\(btnAction.page_url)")
-            }
-            else{
-                showAlertReject()
-            }
+            showAlertReject()
         case "cancel":
             showAlertCancel()
         case "approve":
@@ -157,6 +151,36 @@ class CrudeButtonCell: UICollectionViewCell {
     
     private func getDefaultAlertReject() -> UIAlertController {
         switch getSystemName(){
+        case System.Advance_loading:
+            return  getDefaultAlertWithTextBox(title: getRejectTitle(), message: getRejectMessage(), Ok: "Ok", Cancel: "Cancel", okAction: { (message) in
+                if  message == "-" || message == ""{
+                    let alert = UIAlertController(title: "Sorry", message: self.getRejectErrorMsg(), preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+                        (action) in
+                    })
+                    alert.addAction(okAction)
+                     log.info("case ad --")
+                    self.delegate?.onActionButton(view: alert)
+                } else {
+                     log.info("case ad")
+                    self.doAdvanceButtonProcess(message: message)
+                }
+            })
+        case System.Final_contract:
+            return getDefaultAlertWithTextBox(title: getRejectTitle(), message: getRejectMessage(), Ok: "Ok", Cancel: "Cancel", okAction: { (message) in
+                if message == "-" || message == "" {
+                    let alert = UIAlertController(title: "Sorry", message: self.getRejectErrorMsg(), preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+                        (action) in
+                    })
+                    alert.addAction(okAction)
+                    log.info("case fi --")
+                    self.delegate?.onActionButton(view: alert)
+                } else {
+                    log.info("case fi")
+                    self.doAdvanceButtonProcess(message: message)
+                }
+            })
         default: // Crude
             return getDefaultAlertWithTextBox(title: getRejectTitle(), message: getRejectMessage(), Ok: "Ok", Cancel: "Cancel", okAction: { (message) in
                 if message == "-" {
@@ -224,10 +248,19 @@ class CrudeButtonCell: UICollectionViewCell {
                 var tmp = message
                 log.info("case adv")
                 if message.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
-                    tmp = "-"
+                    tmp = ""
                 }
                 self.doAdvanceButtonProcess(message: tmp)
             })
+            case System.Final_contract:
+                  return getDefaultAlert(title: getApproveTitle(), message: getApproveMessage(), Ok: "OK", Cancel: "Cancel", okAction: { (message) in
+                      var tmp = message
+                      log.info("case final")
+                      if message.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+                          tmp = ""
+                      }
+                      self.doAdvanceButtonProcess(message: tmp)
+                  })
         default: // Crude
             return getDefaultAlert(title: getApproveTitle(), message: getApproveMessage(), Ok: "Yes", Cancel: "No", okAction: { (message) in
                 self.doButtonProcess(message: "-")
@@ -375,7 +408,7 @@ class CrudeButtonCell: UICollectionViewCell {
     
     private func doAdvanceButtonProcess(message: String) {
         self.delegate?.showLoadingHud(text: "Updating Transaction...")
-        APIManager.shareInstance.sendXMLFromAdvanceButton(xml: btnAction.call_xml) { (success, xmlError, dataDict) in
+        APIManager.shareInstance.sendXMLFromAdvanceButton(xml: btnAction.call_xml, actionName:btnAction.name, message:message) { (success, xmlError, dataDict) in
             self.delegate?.onActionButtonResult(Success: success, xmlError: xmlError, dataDict: dataDict)
         }
     }

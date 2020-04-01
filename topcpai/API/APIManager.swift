@@ -218,7 +218,7 @@ class APIManager {
                    }
         }
         log.info("transaction_id \(transaction_id)")
-        let bodyString = xmlBuilder.getAdvanceXML(system: system, type: doc_type, transaction_id: transaction_id, action:action )
+        let bodyString = xmlBuilder.getAdvanceXML(system: system, type: doc_type, transaction_id: transaction_id, action:action ,reason:"reason" )
         
         return bodyString
     }
@@ -292,7 +292,7 @@ class APIManager {
         }
     }
     
-    func sendXMLFromAdvanceButton( xml: String, callback: ((_ success: Bool, _ fail: MyError, _ dataDict: [String: Any]) -> Void)?) {
+    func sendXMLFromAdvanceButton( xml: String, actionName: String, message:String,callback: ((_ success: Bool, _ fail: MyError, _ dataDict: [String: Any]) -> Void)?) {
         let dataDict = Dictionary<String, Any>()
         
         if !connectedToNetwork(){
@@ -300,7 +300,13 @@ class APIManager {
             callback?(false, err, dataDict)
             return
         }
-        httpClient.postAndDecodeData(path: Paths.defaultPath, body: (xml.data(using: .utf8))! as NSData) {
+
+        
+        let xmlRequest = xml.replacingOccurrences(of: "reason", with: message)
+        
+        log.info( "pastexmlRequest \(xmlRequest)")
+        
+        httpClient.postAndDecodeData(path: Paths.defaultPath, body: (xmlRequest.data(using: .utf8))! as NSData) {
             (decodedData, response, error) in
             
             self.setupXMLDocument(xmlData: decodedData!, response: response, error: error, callback: {
