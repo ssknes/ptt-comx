@@ -105,7 +105,7 @@ class ListCell: UITableViewCell {
             }else if(tmpArrContractData.count > 0){
                for item in tmpArrContractData {
                  appendValue(hd: "Sale&Re-Optimization No. :", val: item["caf_contract_no"] as? String ?? "")
-                 appendValue(hd: "Contact For :",val: Data["doc_no"] as? String ?? "")
+                 appendValue(hd: "Contract For :",val: Data["doc_no"] as? String ?? "")
                 if(item["caf_status"] as? String == "WAITING APPROVE"){
                    appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
                 }else {
@@ -131,7 +131,7 @@ class ListCell: UITableViewCell {
             }else if(tmpArrContractData.count > 0){
                for item in tmpArrContractData {
                  appendValue(hd: "Sale No. :", val: item["caf_contract_no"] as? String ?? "")
-                 appendValue(hd: "Contact For :",val: Data["doc_no"] as? String ?? "")
+                 appendValue(hd: "Contract For :",val: Data["doc_no"] as? String ?? "")
                 if(item["caf_status"] as? String == "WAITING APPROVE"){
                    appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
                 }else {
@@ -199,7 +199,7 @@ class ListCell: UITableViewCell {
         }else if(tmpArrContractData.count > 0){
            for item in tmpArrContractData {
              appendValue(hd: "Reference No. :", val: item["caf_contract_no"] as? String ?? "")
-             appendValue(hd: "Contact For :",val: Data["doc_no"] as? String ?? "")
+             appendValue(hd: "Contract For :",val: Data["doc_no"] as? String ?? "")
             if(item["caf_status"] as? String == "WAITING APPROVE"){
                appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
             }else {
@@ -252,7 +252,7 @@ class ListCell: UITableViewCell {
         }else if(tmpArrContractData.count > 0){
            for item in tmpArrContractData {
              appendValue(hd: "Reference No. :", val: item["caf_contract_no"] as? String ?? "")
-             appendValue(hd: "Contact For :",val: Data["purchase_no"] as? String ?? "")
+             appendValue(hd: "Contract For :",val: Data["purchase_no"] as? String ?? "")
             if(item["caf_status"] as? String == "WAITING APPROVE"){
                appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
             }else {
@@ -291,7 +291,7 @@ class ListCell: UITableViewCell {
                 }else if(tmpArrContractData.count > 0){
                     for item in tmpArrContractData {
                         appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "")
-                        appendValue(hd: "Contact For :",val: Data["purchase_no"] as? String ?? "")
+                        appendValue(hd: "Contract For :",val: Data["purchase_no"] as? String ?? "")
                         if(item["caf_status"] as? String == "WAITING APPROVE"){
                            appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
                         }else {
@@ -338,7 +338,7 @@ class ListCell: UITableViewCell {
                 }else if(tmpArrContractData.count > 0){
                     for item in tmpArrContractData {
                         appendValue(hd: "Document No. :", val: item["caf_contract_no"] as? String ?? "")
-                        appendValue(hd: "Contact For :",val: Data["purchase_no"] as? String ?? "")
+                        appendValue(hd: "Contract For :",val: Data["purchase_no"] as? String ?? "")
                         if(item["caf_status"] as? String == "WAITING APPROVE"){
                            appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
                         }else {
@@ -379,7 +379,7 @@ class ListCell: UITableViewCell {
                 }else if(tmpArrContractData.count > 0){
                     for item in tmpArrContractData {
                         appendValue(hd: "Document No. :", val: item["caf_contract_no"] as? String ?? "")
-                        appendValue(hd: "Contact For :",val: Data["purchase_no"] as? String ?? "")
+                        appendValue(hd: "Contract For :",val: Data["purchase_no"] as? String ?? "")
                         if(item["caf_status"] as? String == "WAITING APPROVE"){
                            appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
                         }else {
@@ -419,7 +419,7 @@ class ListCell: UITableViewCell {
                 }else if(tmpArrContractData.count > 0){
                     for item in tmpArrContractData {
                         appendValue(hd: "Document No. :", val: item["caf_contract_no"] as? String ?? "")
-                        appendValue(hd: "Contact For :",val: Data["purchase_no"] as? String ?? "")
+                        appendValue(hd: "Contract For :",val: Data["purchase_no"] as? String ?? "")
                         if(item["caf_status"] as? String == "WAITING APPROVE"){
                            appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT")
                         }else {

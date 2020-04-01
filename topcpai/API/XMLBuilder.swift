@@ -324,31 +324,17 @@ class XMLBuilder {
                     "transaction_id": transaction_id,
                     "mobile_flag" : "Y"]
         case System.Advance_loading:
-            
-//            let data = AdvanceJson()
-//            var json = [AdvanceJson]()
-//            data.trans_id = transaction_id
-//            data.action = "APPROVE"
-//            data.reject_reason = ""
-//            json.append(data)
-//
-            let json: [Any]  = [
-                [
-                    "trans_id": transaction_id,
-                    "action": "APPROVE",
-                    "reject_reason": "",
-                  
-                ]
-            ]
-            
-            let jsonData = try! JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
-             let jsonString = String(data:jsonData,  encoding: .utf8)
-                  return ["channel"       : "MOBILE",
-                          "user"          : CredentialManager.shareInstance.userId ?? "",
-                          "system"        : system,
-                          "doc_type"      : type,
-                          "data_detail_input": jsonString!
-                          ]
+            return ["channel"       : "MOBILE",
+                    "user"          : CredentialManager.shareInstance.userId ?? "",
+                    "system"        : system,
+                    "doc_type"      : type,
+                    "data_detail_input": "#json"]
+        case System.Final_contract:
+            return ["channel"       : "MOBILE",
+                    "user"          : CredentialManager.shareInstance.userId ?? "",
+                    "system"        : system,
+                    "doc_type"      : type,
+                    "data_detail_input": "#json"]
             
         default: //Crude, Bunker, Chartering, VCool
             return ["channel"       : "MOBILE",
@@ -359,11 +345,21 @@ class XMLBuilder {
                     "mobile_flag" : "Y"]
         }
     }
-    func getAdvanceXML(system: String, type: String, transaction_id: String) -> String {
+    func getAdvanceXML(system: String, type: String, transaction_id: String ,action: String) -> String {
         let params = getActionButtonXMLParams(system: system, type: type, transaction_id: transaction_id, companycode: "companyCode")
         let funcID = "F10000114"
         
-        let xmlRequest = buildXMLDoc(functionId: funcID, params: params)
+        let json: [Any]  = [
+                      [
+                          "trans_id": transaction_id,
+                          "action": action,
+                          "reject_reason": "",
+                      ]
+                  ]
+                  
+                  let jsonData = try! JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+                   let jsonString = String(data:jsonData,  encoding: .utf8)
+        let xmlRequest = buildAdvanceXMLDoc(functionId: funcID, params: params, json: jsonString! )
         
         log.debug(xmlRequest.xml)
         return xmlRequest.xmlCompact
@@ -584,6 +580,25 @@ class XMLBuilder {
     
     private func buildXMLDoc(functionId: String, params: [String: String]) -> AEXMLDocument {
         let xmlRequest = AEXMLDocument()
+        let attr = [
+            "function_id": functionId,
+            "app_user": app_user,
+            "app_password": app_password,
+            "req_transaction_id": reqTransactionId.md5(),
+            "state_name": ""
+        ]
+        
+        let root = xmlRequest.addChild(name: "request", attributes: attr)
+        let reqParams = root.addChild(name: "req_parameters")
+        
+        for (key, value) in params {
+            reqParams.addChild(name: "p", value: "", attributes: ["k": key, "v": value])
+        }
+        return xmlRequest
+    }
+    
+    private func buildAdvanceXMLDoc(functionId: String,params: [String: String],json:String) -> AEXMLDocument {
+        let xmlRequest = AEXMLDocument()
         
         let attr = [
             "function_id": functionId,
@@ -595,6 +610,9 @@ class XMLBuilder {
         
         let root = xmlRequest.addChild(name: "request", attributes: attr)
         let reqParams = root.addChild(name: "req_parameters")
+        root.addChild(name:"extra_xml",value:json)
+        
+        
         
         for (key, value) in params {
             reqParams.addChild(name: "p", value: "", attributes: ["k": key, "v": value])

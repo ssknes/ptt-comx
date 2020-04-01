@@ -72,6 +72,10 @@ class ListDataCell: UITableViewCell {
                 lblValue.font = UIFont.init(name: "Kanit-Light", size: GlobalVar.sharedInstance.getFontSize())
                 lblValue.textColor = txtColorBold
             }
+             else if (lblHeader.text?.lowercased().contains("contract for"))! {
+                lblValue.font = UIFont.init(name: "Kanit-Light", size: GlobalVar.sharedInstance.getFontSize())
+                lblValue.textColor = txtColorBold
+            }
             else if (lblHeader.text?.lowercased().contains("status"))! {
                 lblValue.font = UIFont.init(name: "Kanit-Light", size: GlobalVar.sharedInstance.getFontSize())
                 lblValue.textColor = txtColorBold

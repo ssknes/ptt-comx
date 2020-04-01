@@ -200,54 +200,28 @@ class APIManager {
             return Data["transaction_id"] as? String ?? ""
         }
     }
-    private func getAdvanceTransactionID(system: String, Data: String) -> String {
-        
-           
-        switch system {
-        case System.Final_contract:
-            return Data as? String ?? ""
-        case System.Advance_loading:
-            return Data as? String ?? ""
-        default:
-            return Data as? String ?? ""
-        }
-       }
     
-    
-    func advanceLoadingXML(Data: [String: Any],system:String) -> String{
+    func advanceLoadingXML(Data: [String: Any],system:String, action : String) -> String{
         
     let doc_type = DataUtils.shared.SysName(Data["system"] as? String ?? "")
-//    let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
-//        let tmpArrContractData = Data["contract_data"] as? [String: Any] ?? [:]
-//    log.info("tst \(tmpArrAdvanceLoading)")
-//      log.info("tst \(tmpArrContractData)")
-//
-//        if  tmpArrAdvanceLoading.count > 0 &&  system == System.Advance_loading{
-//
-//                     if  tmpArrAdvanceLoading.count > 0 && system == System.Final_contract {
-//                         for item in tmpArrContractData {
-//                              xx = item["caf_trans_id"] as! String
-//                         }
-//
-//                     }else{
-//                         for item in tmpArrAdvanceLoading {
-//                               xx = item["alr_trans_id"] as! String
-//                         }
-//                     }
-//                 }
-        var transaction_id : String
-        if system == System.Advance_loading {
-            transaction_id = getTransactionID(system: system, Data: Data)
+    let tmpArrAdvanceLoading = Data["advance_loading_request_data"] as? [[String: Any]] ?? []
+    let tmpArrContractData = Data["contract_data"] as? [[String: Any]] ?? []
+    
+        var transaction_id : String = ""
+        if system == System.Advance_loading{
+            for item in tmpArrAdvanceLoading {
+                       transaction_id = item["alr_trans_id"] as! String
+                   }
         }else{
-            transaction_id = getTransactionID(system: system, Data: Data)
+            for item in tmpArrContractData {
+                       transaction_id = item["caf_trans_id"] as! String
+                   }
         }
-        
-        
-        let bodyString = xmlBuilder.getAdvanceXML(system: system, type: doc_type, transaction_id: transaction_id )
+        log.info("transaction_id \(transaction_id)")
+        let bodyString = xmlBuilder.getAdvanceXML(system: system, type: doc_type, transaction_id: transaction_id, action:action )
         
         return bodyString
     }
-    
     
     func getActionButton(Data: [String: Any], callback: ((_ success: Bool, _ fail: MyError, _ data: [Button]) -> Void)?) {
         //init First Data
@@ -355,6 +329,7 @@ class APIManager {
         
         let bodyString = xmlBuilder.sendXMLFromButtonWithJsonData(system: system, type: type, xml: xml, req_txn_id: req_txn_id, note: note, jsonData: "", brief: txtBrief)
         
+        log.info("bodyStringsendXMLFromButton \(bodyString)")
         if bodyString == "" {
             let err = MyError(message: MyMessage.failedToCreateRequestBody)
             callback?(false, err, dataDict)

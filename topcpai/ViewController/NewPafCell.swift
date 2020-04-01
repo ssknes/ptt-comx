@@ -70,7 +70,7 @@ class NewPafCell: BaseDataCell {
             for item in tmpArrContractData{
                keyCell = 5
                appendValue(hd: "Reference No. :", val: item["caf_contract_no"] as? String ?? "-", noValueHide: false)
-               appendValue(hd: "contact For :", val: Data["doc_no"] as? String ?? "", noValueHide: false)
+               appendValue(hd: "contract For :", val: Data["doc_no"] as? String ?? "", noValueHide: false)
                appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
                appendValue(hd: "Transaction For :", val: Data["doc_for"] as? String ?? "", noValueHide: false)
                appendValue(hd: "Customer :", val: item["caf_customer"] as? String ?? "", noValueHide: false)

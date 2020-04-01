@@ -16,6 +16,7 @@ class ActionButton: UIButton {
     var transaction_id: String = ""
     var req_txn_id: String = ""
     var Row = -1
+    var page_url: String = ""
 
     /*
     // Only override draw() if you perform custom drawing.

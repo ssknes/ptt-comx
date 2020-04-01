@@ -39,7 +39,14 @@ class CrudeButtonCell: UICollectionViewCell {
         case "print":
             delegate?.onActionButtonPDF(button: btnAction)
         case "reject":
-            showAlertReject()
+            if btnAction.page_url == System.Advance_loading{
+                 log.info("btnAction.page_url A\(btnAction.page_url)")
+            }else if btnAction.page_url == System.Final_contract{
+                log.info("btnAction.page_url F\(btnAction.page_url)")
+            }
+            else{
+                showAlertReject()
+            }
         case "cancel":
             showAlertCancel()
         case "approve":

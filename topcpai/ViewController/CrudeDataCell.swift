@@ -63,7 +63,7 @@ class CrudeDataCell: BaseDataCell {
           }
         }else if tmpArrContractData.count > 0 {
             for item in tmpArrContractData {
-                appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+                appendValue(hd: "Contract For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
                if(item["caf_status"] as? String == "WAITING APPROVE"){
                 appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
                }else {

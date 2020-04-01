@@ -76,7 +76,7 @@ class BunkerDataCell: BaseDataCell {
               system = System.Final_contract
                 for item in tmpArrContractData {
                     appendValue(hd: "Purchase No. :", val: item["caf_contract_no"] as? String ?? "-", noValueHide: false)
-                    appendValue(hd: "Contact For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
+                    appendValue(hd: "Contract For :", val: Data["purchase_no"] as? String ?? "", noValueHide: false)
                     if(item["caf_status"] as? String == "WAITING APPROVE"){
                     appendValue(hd: "Status :", val: "WAITING FINAL CONTRACT", noValueHide: false)
                     }else {
